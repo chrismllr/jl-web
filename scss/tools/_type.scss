@@ -1,0 +1,69 @@
+$size_base: 1em;
+$size_base_small: .875em;
+@import '{}/scss/tools/_colors.scss';
+
+@mixin primary_font {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@mixin secondary_font {
+  font-family: 'Patua One', serif;
+}
+
+@mixin script_font {
+  font-family: 'Satisfy', sans-serif;
+}
+
+h1,
+h2 {
+  @include script_font();
+  color: palette(gray,x-dark);
+  margin: .5em 0;
+}
+
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  @include primary_font();
+  margin: 0;
+}
+
+p {
+  color: palette(gray,dark);
+}
+
+h1 {
+  font-size: 3.875em;
+}
+
+h2 {
+  font-size: 2.125em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.25em
+}
+
+h5,
+h6 {
+  font-size: 1.125em;
+}
+
+// Helpers
+
+.ital {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}

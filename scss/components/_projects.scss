@@ -1,0 +1,20 @@
+.project {
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    width: 50%;
+
+    &__content {
+      margin: 2em;
+      min-height: 16em;
+      text-align: center;
+
+      h3 {
+        color: #FFF;
+      }
+    }
+  }
+}

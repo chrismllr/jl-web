@@ -1,0 +1,59 @@
+///////////////////////////////////////////////////
+// COLORS
+///////////////////////////////////////////////////
+
+$white      : #fff;
+$gray       : #c1c2c4;
+
+$red        : #e54d42;
+$orange     : #EF832C;
+$green      : #28965A;
+$navy       : #2E6171;
+
+// Color Palette Modifiers
+$palettes: (
+  gray: (
+    xx-light  : #f8f8f8,
+    x-light   : #eaeaea,
+    light     : #d5d5d5,
+    base      : $gray,
+    dark      : #646567,
+    x-dark    : #3e403f,
+    xx-dark   : #29282d
+  ),
+  navy: (
+    light     : lighten($navy, 10%),
+    base      : $navy,
+    dark      : darken($navy,10%)
+  ),
+  green: (
+    x-light   : #91F5AD,
+    light     : lighten($green,5%),
+    base      : $green,
+    dark      : darken($green,5%)
+  ),
+  red: (
+    x-light   : #fbf2f2,
+    light     : #f2e2e2,
+    salmon    : #ff7763,
+    base      : $red,
+    dark      : #bd3a3a,
+  )
+);
+
+@function palette($palette: 'gray', $shade: 'base') {
+  @return map-get(map-get($palettes, $palette), $shade);
+}
+
+
+
+// UI Colors
+$ui-colors: (
+  default     : palette(gray,light),
+  error       : $red,
+  revoke      : $red,
+  warning     : $orange,
+  success     : $green,
+  info        : $navy,
+  featured    : rgba(black,.3)
+) !default;
