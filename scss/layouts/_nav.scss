@@ -1,0 +1,29 @@
+.nav {
+  &__list {
+    margin: 2em 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__item {
+      @include secondary_font();
+
+      a {
+        color: palette(gray);
+        text-decoration: none;
+      }
+
+      &.active {
+        a {
+          color: palette(gray, x-dark)
+        }
+      }
+
+      &:first-of-type {
+        margin-right: 1em;
+      }
+    }
+  }
+}
