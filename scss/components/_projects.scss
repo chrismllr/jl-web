@@ -2,18 +2,57 @@
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
+    max-width: 76em;
+    margin: 0 auto;
   }
 
   &__item {
     width: 50%;
+    height: 100vh;
+    position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
 
-    &__content {
-      margin: 2em;
-      min-height: 16em;
-      text-align: center;
+    .hover-box {
+      height: calc(100% - 20px);
+      width: calc(100% - 20px);
+      position: absolute;
+      display: inline-block;
+      border: 2px solid white;
+      margin: 10px;
+      opacity: 0;
+      transition: .3s ease-in-out;
+    }
 
-      h3 {
-        color: #FFF;
+    &:after {
+      transition: .3s ease-in-out;
+      @include s-overlay($white, 0);
+    }
+
+    &:hover {
+      .hover-box {
+        opacity: 1;
+      }
+      &:after {
+        @include s-overlay($white, .3);
+      }
+    }
+
+    @media (max-width: 570px) {
+      width: 100%;
+    }
+
+    animation: fadeIn 1s 1s;
+    animation-fill-mode: both;
+
+    @for $i from 1 through 100 {
+      $sub: 1;
+      $div: 10;
+
+      &:nth-child(#{$i}) {
+        animation-delay: #{($i - $sub) / $div}s;
       }
     }
   }

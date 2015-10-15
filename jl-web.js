@@ -1,14 +1,14 @@
 if (Meteor.isClient) {
   Template.Projects.helpers({
     projects: [
-      {id: 1, title: 'Project One', colors: {primary: '#A7D7B0', secondary: '#5BA36A'}},
-      {id: 2, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 3, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 4, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 5, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 6, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 7, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}},
-      {id: 8, title: 'Project Two', colors: {primary: '#CBE7F5', secondary: '#07B5E5'}}
+      {id: 1, img: '/content/img001.jpg'},
+      {id: 2, img: '/content/img002.jpg'},
+      {id: 3, img: '/content/img003.jpg'},
+      {id: 4, img: '/content/img004.jpg'},
+      {id: 5, img: '/content/img005.jpg'},
+      {id: 6, img: '/content/img006.jpg'},
+      {id: 7, img: '/content/img007.jpg'},
+      {id: 8, img: '/content/img008.jpg'}
     ]
   });
 
@@ -17,8 +17,11 @@ if (Meteor.isClient) {
   });
 
   Template.Header.helpers({
-    swapForText: function() {
-      return Template.instance().swapForText.get();
+    isWork: function() {
+      return Router.current().location.get().path === '/';
+    },
+    isContact: function() {
+      return Router.current().location.get().path === '/contact';
     }
   });
 
@@ -39,6 +42,7 @@ if (Meteor.isClient) {
       cacheDom: function() {
         this.$window = $(window);
         this.$siteHeader = $('#site-header');
+        this.$siteContent = $('#site-content');
       },
 
       scrollEvents: function() {
@@ -46,10 +50,11 @@ if (Meteor.isClient) {
         var height = this.$siteHeader.innerHeight();
 
         this.$window.on('scroll', function() {
-          if (_this.$window.scrollTop() >= height - 110) {
+          if (_this.$window.scrollTop() >= height) {
             _this.$siteHeader.addClass('scrolled-past');
-            _this.$window.scrollTop(110);
+            _this.$siteContent.css('margin-top', height);
           } else {
+            _this.$siteContent.css('margin-top', 0);
             _this.$siteHeader.removeClass('scrolled-past');
           }
         });
@@ -71,4 +76,12 @@ Router.configure({
 
 Router.route('/', function () {
   this.layout('Application');
+
+  this.render('Projects');
+});
+
+Router.route('/contact', function () {
+  this.layout('Application');
+
+  this.render('Contact');
 });

@@ -1,5 +1,6 @@
 @import 'tools/all-tools';
 @import 'components/all-components';
+@import 'layouts/all-layouts';
 
 pre {
 	display: none;
@@ -10,8 +11,8 @@ button,
 input,
 select,
 textarea {
-	// @include primary_font();
-	// color: palette(gray,x-dark);
+	@include primary_font();
+	color: palette(gray,x-dark);
 }
 
 * {
@@ -24,7 +25,7 @@ body {
 	margin: 0;
 	font-size: 14pt;
 	line-height: 1.4;
-	// background: palette(gray,xx-light);
+	background: palette(gray,xx-light);
 
 	@media (max-width: 64em) {
 		line-height: 1;
