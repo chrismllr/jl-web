@@ -65,5 +65,9 @@ h6 {
 
 .uppercase {
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: 2px;
+
+  &--sm {
+    font-size: .875em;
+  }
 }

@@ -24,7 +24,7 @@
   <section class='intro intro--center-text section--sm'>
     <div class="intro__content">
       <h2>Justin Leveritt</h2>
-      <p class="intro__text uppercase">Photography</p>
+      <p class="intro__text uppercase uppercase--sm">Photography</p>
     </div>
     <nav class="nav">
       <ul class="nav__list">
@@ -42,16 +42,30 @@
 <template name="Projects">
   <div class="project__wrapper">
     {{#each projects}}
-      <div class="project__item"
-        style="background-image: url({{img}})">
+      <div class="project__item" style="background-image: url({{img}})">
         <span class=hover-box></span>
       </div>
     {{/each}}
+
+    {{#if lightbox}}
+      <div class="lightbox">
+        <img src={{selectedProj.img}} alt="" />
+      </div>
+    {{/if}}
   </div>
 </template>
 
 <template name="Contact">
-  Hi!
+  <div class="contact__wrapper">
+    <section class="user__details">
+      <div class="user__img" style="background-image: url({{userImg}})"></div>
+      <h6>Justin Leveritt</h6>
+      <p>Justin is a photographer based in Dallas, TX.</p>
+    </section>
+    <img src="/assets/instagram.svg" alt="" />
+    <img src="/assets/twitter.svg" alt="" />
+    <img src="/assets/email.svg" alt="" />
+  </div>
 </template>
 
 <template name="Footer">

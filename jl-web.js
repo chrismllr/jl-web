@@ -1,21 +1,4 @@
 if (Meteor.isClient) {
-  Template.Projects.helpers({
-    projects: [
-      {id: 1, img: '/content/img001.jpg'},
-      {id: 2, img: '/content/img002.jpg'},
-      {id: 3, img: '/content/img003.jpg'},
-      {id: 4, img: '/content/img004.jpg'},
-      {id: 5, img: '/content/img005.jpg'},
-      {id: 6, img: '/content/img006.jpg'},
-      {id: 7, img: '/content/img007.jpg'},
-      {id: 8, img: '/content/img008.jpg'}
-    ]
-  });
-
-  Template.Header.onCreated(function() {
-    this.swapForText = new ReactiveVar(false);
-  });
-
   Template.Header.helpers({
     isWork: function() {
       return Router.current().location.get().path === '/';
@@ -25,10 +8,42 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.Header.events({
-    'click #swap-text': function() {
-      var val = Template.instance().swapForText.get();
-      Template.instance().swapForText.set(!val);
+  Template.Projects.helpers({
+    projects: [
+      {id: 1, img: '/content/img001.jpg'},
+      {id: 2, img: '/content/img002.jpg'},
+      {id: 3, img: '/content/img003.jpg'},
+      {id: 4, img: '/content/img004.jpg'},
+      {id: 5, img: '/content/img005.jpg'},
+      {id: 6, img: '/content/img006.jpg'},
+      {id: 7, img: '/content/img007.jpg'},
+      {id: 8, img: '/content/moto-example.png'},
+      {id: 9, img: '/content/chris-example.png'}
+    ]
+  });
+
+  Template.Projects.onCreated(function() {
+    this.lightbox = new ReactiveVar(false);
+    this.selectedProj = new ReactiveVar({});
+  });
+
+  Template.Projects.events({
+    'click .project__item': function(e, t) {
+      const lightboxInstance = Template.instance().lightbox;
+      const curLightboxVal = lightboxInstance.get();
+
+      lightboxInstance.set(!curLightboxVal);
+      Template.instance().selectedProj.set(this);
+
+      console.log('new lightbox val', lightboxInstance.get());
+      console.log('new selectedProj val', Template.instance().selectedProj.get());
+
+      setTimeout(function() {
+        $(document).one('click', function() {
+          lightboxInstance.set(!lightboxInstance.get());
+          console.log('new lightbox val', lightboxInstance.get());
+        });
+      }, 50);
     }
   });
 
