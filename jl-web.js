@@ -41,24 +41,24 @@ if (Meteor.isClient) {
   });
 
   Template.Projects.onCreated(function() {
+    var _this = this;
     this.lightbox = new ReactiveVar(false);
     this.selectedProj = new ReactiveVar({});
+    this.projects = []
+
+    return Meteor.call('getClientConfig', function (err, result) {
+      if (result) {
+        Session.set('projects', result.projects)
+      }
+    });
   });
 
   Template.Projects.helpers({
-    projects: [
-      {id: 1, img: '/content/img001.jpg'},
-      {id: 2, img: '/content/img002.jpg'},
-      {id: 3, img: '/content/img003.jpg'},
-      {id: 4, img: '/content/img004.jpg'},
-      {id: 5, img: '/content/img005.jpg'},
-      {id: 6, img: '/content/img006.jpg'},
-      {id: 7, img: '/content/img007.jpg'},
-      {id: 8, img: '/content/moto-example.png'},
-      {id: 9, img: '/content/chris-example.png'}
-    ],
     lightbox: function() {
       return Template.instance().lightbox.get();
+    },
+    projects: function() {
+      return Session.get('projects');
     },
     selectedProj: function() {
       return Template.instance().selectedProj.get();
@@ -109,5 +109,6 @@ Router.route('/contact', function () {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+    YamlConfig.loadFiles(Assets);
   });
 }

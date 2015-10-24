@@ -1,0 +1,33 @@
+projects:
+-
+  img : /content/img001.jpg
+  name : girl1
+  projectCategory : main
+-
+  img : /content/img002.jpg
+  name : girl2
+  projectCategory : main
+-
+  img : /content/img003.jpg
+  name : girl3
+  projectCategory : main
+-
+  img : /content/img004.jpg
+  name : girl4
+  projectCategory : main
+-
+  img : /content/img005.jpg
+  name : girl5
+  projectCategory : main
+-
+  img : /content/img006.jpg
+  name : girl6
+  projectCategory : main
+-
+  img : /content/img007.jpg
+  name : girl7
+  projectCategory : main
+-
+  img : /content/moto-example.png
+  name : girl8
+  projectCategory : main

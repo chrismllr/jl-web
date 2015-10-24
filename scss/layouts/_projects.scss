@@ -1,19 +1,16 @@
 .project {
   &__wrapper {
-    display: flex;
     height: 66vh;
+    width: 100vw;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
   }
 
   &__item {
-    min-width: 29vw;
-    min-height: 66vh;
+    height: 100%;
+    display: inline;
     position: relative;
-    background-size: contain;
-    margin-right: .5em;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
     cursor: pointer;
 
     &:after {
@@ -25,14 +22,6 @@
       &:after {
         @include s-overlay($white, .2);
       }
-    }
-
-    @include gmq(portable) {
-      min-width: 45vw;
-    }
-
-    @include gmq(palm) {
-      min-width: 100vw;
     }
 
     animation: fadeIn 1s 1s;
