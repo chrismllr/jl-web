@@ -1,31 +1,20 @@
 .project {
   &__wrapper {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 76em;
-    margin: 0 auto;
+    height: 66vh;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   &__item {
-    min-width: 22em;
-    min-height: 28em;
+    min-width: 29vw;
+    min-height: 66vh;
     position: relative;
-    background-size: cover;
+    background-size: contain;
+    margin-right: .5em;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     cursor: pointer;
-
-    .hover-box {
-      height: calc(100% - 20px);
-      width: calc(100% - 20px);
-      position: absolute;
-      display: inline-block;
-      border: 2px solid white;
-      margin: 10px;
-      opacity: 0;
-      transition: .3s ease-in-out;
-    }
 
     &:after {
       transition: .3s ease-in-out;
@@ -33,16 +22,17 @@
     }
 
     &:hover {
-      .hover-box {
-        opacity: 1;
-      }
       &:after {
         @include s-overlay($white, .2);
       }
     }
 
+    @include gmq(portable) {
+      min-width: 45vw;
+    }
+
     @include gmq(palm) {
-      width: 100vw;
+      min-width: 100vw;
     }
 
     animation: fadeIn 1s 1s;

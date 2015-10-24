@@ -1,6 +1,6 @@
 @import 'tools/all-tools';
-@import 'components/all-components';
 @import 'layouts/all-layouts';
+@import 'components/all-components';
 
 pre {
 	display: none;
@@ -33,7 +33,8 @@ body {
 }
 
 .site {
-
+	min-height: 100vh;
+	height: 100%;
 }
 
 .container {

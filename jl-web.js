@@ -85,6 +85,10 @@ if (Meteor.isClient) {
       }, 50);
     }
   });
+
+  Template.Contact.helpers({
+    userImg: '/assets/justin.png'
+  })
 }
 
 Router.configure({

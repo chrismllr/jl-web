@@ -1,28 +1,10 @@
-section {
-  width: 100%;
-	padding: 10em 0;
-	position: relative;
-	overflow: hidden;
+.intro__content {
+  padding: 0 7vw;
 
-  &.section--sm {
-    padding: 3em 0;
+  h2 {
+    font-size: 1.5em;
+    margin: 0;
   }
-
-	&.intro {
-    &--full {
-      height: 100vh;
-    }
-
-    &--gray {
-      background-color: palette(gray,x-light);
-    }
-
-    &--center-text {
-      text-align: center;
-
-      h2 { margin: .2em 0; }
-    }
-	}
 }
 
 #site-header {

@@ -7,7 +7,7 @@ $size_base_small: .875em;
 }
 
 @mixin secondary_font {
-  font-family: 'Patua One', serif;
+  font-family: 'Inconsolata', 'Monaco', monospace;
 }
 
 @mixin script_font {
@@ -27,7 +27,8 @@ h5,
 h6,
 p,
 span {
-  @include primary_font();
+  @include secondary_font();
+  color: palette(gray,x-dark);
   margin: 0;
 }
 

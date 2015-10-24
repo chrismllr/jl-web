@@ -1,0 +1,38 @@
+.contact {
+  &__wrapper {
+    padding: 0 7vw;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &__icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 1em;
+    cursor: pointer;
+    opacity: .5;
+    transition: .3s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.user {
+  &__details {
+    padding: 0 0 3.6em;
+  }
+
+  &__img {
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    background-position: 50% 50%;
+    border: 2px solid palette(gray,x-dark);
+    border-radius: 30px;
+    margin-bottom: 1em;
+  }
+}

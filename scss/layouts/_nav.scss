@@ -1,11 +1,13 @@
 .nav {
+  border-bottom: 1px solid palette(gray,dark);
+  
   &__list {
-    margin: 2em 0;
+    margin: .5em 0;
     padding: 0;
     list-style: none;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     &__item {
       @include secondary_font();

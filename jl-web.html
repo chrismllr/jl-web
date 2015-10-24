@@ -2,6 +2,7 @@
   <title>Justin Leveritt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"> -->
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Patua+One|Satisfy|Source+Sans+Pro:400,300,600,700,300italic,400italic' rel='stylesheet' type='text/css'>
 </head>
 
@@ -21,30 +22,29 @@
 </template>
 
 <template name="Header">
-  <section class='intro intro--center-text section--sm'>
+  <section class='intro section--sm'>
     <div class="intro__content">
       <h2>Justin Leveritt</h2>
-      <p class="intro__text uppercase uppercase--sm">Photography</p>
+      <!-- <p class="intro__text uppercase uppercasesm">Photography</p> -->
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__list__item {{#if isWork}}active{{/if}}">
+            <a href="/">work</a>
+          </li>
+          <li class="nav__list__item {{#if isContact}}active{{/if}}">
+            <a href="/contact">contact</a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <nav class="nav">
-      <ul class="nav__list">
-        <li class="nav__list__item {{#if isWork}}active{{/if}}">
-          <a href="/">work</a>
-        </li>
-        <li class="nav__list__item {{#if isContact}}active{{/if}}">
-          <a href="/contact">contact</a>
-        </li>
-      </ul>
-    </nav>
   </section>
 </template>
 
 <template name="Projects">
   <div class="project__wrapper">
     {{#each projects}}
-      <div class="project__item" style="background-image: url({{img}})">
-        <span class=hover-box></span>
-      </div>
+      <!-- <img src="{{img}}" alt="" /> -->
+      <div class="project__item" style="background-image: url({{img}})"></div>
     {{/each}}
   </div>
 
@@ -62,9 +62,15 @@
       <h6>Justin Leveritt</h6>
       <p>Justin is a photographer based in Dallas, TX.</p>
     </section>
-    <img src="/assets/instagram.svg" alt="" />
-    <img src="/assets/twitter.svg" alt="" />
-    <img src="/assets/email.svg" alt="" />
+    <a href="http://instagram.com/jleveritt_/" target="_blank">
+      <img class="contact__icon" src="/assets/instagram.svg" alt="" />
+    </a>
+    <a href="http://twitter.com/JLeveritt_" target="_blank">
+      <img class="contact__icon" src="/assets/twitter.svg" alt="" />
+    </a>
+    <a href="mailto:justin.leveritt@gmail.com">
+      <img class="contact__icon" src="/assets/email.svg" alt="" />
+    </a>
   </div>
 </template>
 
