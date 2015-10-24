@@ -26,9 +26,14 @@ body {
 	font-size: 14pt;
 	line-height: 1.4;
 	background: palette(gray,xx-light);
+	transition: font-size .3s ease-in-out;
 
 	@media (max-width: 64em) {
 		line-height: 1;
+	}
+
+	@media (max-height: 370px) {
+		font-size: 85%;
 	}
 }
 

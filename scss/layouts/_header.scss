@@ -7,6 +7,19 @@
   }
 }
 
+.site__header {
+  display: flex;
+  align-items: center;
+  height: 33vh;
+
+  // @media (max-height: 330px) {
+  //   .intro__content {
+  //     h2 { font-size: 1em; }
+  //     .nav { font-size: 80% }
+  //   }
+  // }
+}
+
 #site-header {
   &.scrolled-past {
     position: fixed;
