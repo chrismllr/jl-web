@@ -8,38 +8,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.Header.onRendered(function() {
-    var application = {
-      init: function() {
-        this.cacheDom();
-        this.scrollEvents();
-      },
-
-      cacheDom: function() {
-        this.$window = $(window);
-        this.$siteHeader = $('#site-header');
-        this.$siteContent = $('#site-content');
-      },
-
-      scrollEvents: function() {
-        var _this = this;
-        var height = this.$siteHeader.innerHeight();
-
-        this.$window.on('scroll', function() {
-          if (_this.$window.scrollTop() >= height) {
-            _this.$siteHeader.addClass('scrolled-past');
-            _this.$siteContent.css('margin-top', height);
-          } else {
-            _this.$siteContent.css('margin-top', 0);
-            _this.$siteHeader.removeClass('scrolled-past');
-          }
-        });
-      }
-    };
-
-    application.init();
-  });
-
   Template.Projects.onCreated(function() {
     var _this = this;
     this.lightbox = new ReactiveVar(false);
@@ -88,7 +56,7 @@ if (Meteor.isClient) {
 
   Template.Contact.helpers({
     userImg: '/assets/justin.png'
-  })
+  });
 }
 
 Router.configure({
