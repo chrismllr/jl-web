@@ -40,6 +40,36 @@ body {
 .site {
 	min-height: 100vh;
 	height: 100%;
+	display: flex;
+
+	&__header {
+		display: flex;
+		align-items: flex-end;
+		height: 100vh;
+		width: 25vw;
+	}
+
+	&__content {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		overflow-x: hidden;
+		width: 75vw;
+	}
+
+	@include gmq(portable) {
+		flex-direction: column;
+
+		&__header {
+			height: 25vh;
+			width: 100vw;
+		}
+
+		&__content {
+			height: 75vh;
+			width: 100vw;
+		}
+	}
 }
 
 .container {

@@ -25,7 +25,6 @@
   <section class='intro section--sm'>
     <div class="intro__content">
       <h2>Justin Leveritt</h2>
-      <!-- <p class="intro__text uppercase uppercasesm">Photography</p> -->
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__list__item {{#if isWork}}active{{/if}}">
@@ -42,10 +41,20 @@
 
 <template name="Projects">
   <div class="project__wrapper">
-    {{#each projects}}
+    {{#HammerTouchArea gestureMap=templateGestures}}
+      <img id="feature-img" src="{{currentFeatureImg.img}}" alt="" class="project__item project__item--featured" />
+    {{/HammerTouchArea}}
+    <!-- {{#each projects}}
       <img src="{{img}}" class="project__item" alt="" />
-    {{/each}}
+    {{/each}} -->
+    <button id="feature-img-back" type="button" name="button" class="project__btn--back">
+      <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--back"/>
+    </button>
+    <button id="feature-img-fwd" type="button" name="button" class="project__btn--fwd">
+      <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--fwd"/>
+    </button>
   </div>
+
 
   {{#if lightbox}}
     <div class="lightbox">

@@ -1,23 +1,10 @@
 .intro__content {
-  padding: 0 7vw;
+  padding: 0 2vw;
 
   h2 {
     font-size: 1.5em;
     margin: 0;
   }
-}
-
-.site__header {
-  display: flex;
-  align-items: center;
-  height: 33vh;
-
-  // @media (max-height: 330px) {
-  //   .intro__content {
-  //     h2 { font-size: 1em; }
-  //     .nav { font-size: 80% }
-  //   }
-  // }
 }
 
 #site-header {

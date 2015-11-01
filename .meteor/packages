@@ -23,3 +23,5 @@ iron:router
 reactive-var
 richsilv:owl-carousel
 monbro:yaml-config-loader
+johnantoni:meteor-svginjector
+chriswessels:hammer
