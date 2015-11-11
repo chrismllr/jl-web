@@ -24,7 +24,9 @@
 <template name="Header">
   <section class='intro section--sm'>
     <div class="intro__content">
-      <h2>Justin Leveritt</h2>
+      <h2>
+        <img src="/assets/jleveritt.svg" class="inject-me jl__logo" />
+      </h2>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__list__item {{#if isWork}}active{{/if}}">
@@ -47,12 +49,18 @@
     <!-- {{#each projects}}
       <img src="{{img}}" class="project__item" alt="" />
     {{/each}} -->
-    <button id="feature-img-back" type="button" name="button" class="project__btn--back">
-      <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--back"/>
-    </button>
-    <button id="feature-img-fwd" type="button" name="button" class="project__btn--fwd">
-      <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--fwd"/>
-    </button>
+    <div class="btn__group">
+      <button id="feature-img-back" type="button" name="button" class="project__btn project__btn--back">
+        <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--back"/>
+      </button>
+      <a id="to-grid" href="/overview" class="project__btn">
+        <img src="/assets/grid.svg" alt="" class="inject-me"/>
+      </a>
+      <button id="feature-img-fwd" type="button" name="button" class="project__btn project__btn--fwd">
+        <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--fwd"/>
+      </button>
+    </div>
+
   </div>
 
 
@@ -70,18 +78,26 @@
       <h6>Justin Leveritt</h6>
       <p>Justin is a photographer based in Dallas, TX.</p>
     </section>
+
     <a href="http://instagram.com/jleveritt_/" target="_blank">
       <img class="contact__icon" src="/assets/instagram.svg" alt="" />
     </a>
     <a href="http://twitter.com/JLeveritt_" target="_blank">
       <img class="contact__icon" src="/assets/twitter.svg" alt="" />
     </a>
-    <a href="mailto:justin.leveritt@gmail.com">
+    <a href="#"
+      id="copy-email"
+      data-tooltip="e-mail address copied to clipboard"
+      data-tooltip-direction="e"
+      data-tooltip-trigger="click"
+      data-email="justin.leveritt@gmail.com">
       <img class="contact__icon" src="/assets/email.svg" alt="" />
     </a>
+
+    {{ > tooltips }}
   </div>
 </template>
 
-<template name="Footer">
+<template name="Overview">
 
 </template>

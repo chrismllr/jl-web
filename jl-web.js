@@ -119,6 +119,27 @@ if (Meteor.isClient) {
   Template.Contact.helpers({
     userImg: '/assets/justin.png'
   });
+
+  const copyClipboard = function(txt) {
+    var textArea = document.createElement("textarea");
+    textArea.style.position = 'fixed';
+    textArea.style.top = 0;
+    textArea.style.left = 0;
+    textArea.style.opacity = 0;
+
+    textArea.value = txt;
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    document.execCommand('copy');
+  };
+
+  Template.Contact.events({
+    'click #copy-email': function(e, t) {
+      copyClipboard(e.currentTarget.getAttribute('data-email'));
+      setTimeout(function() { Tooltips.hide(); }, 3500);
+    }
+  });
 }
 
 Router.configure({
@@ -135,6 +156,12 @@ Router.route('/contact', function () {
   this.layout('Application');
 
   this.render('Contact');
+});
+
+Router.route('/overview', function () {
+  this.layout('Application');
+
+  this.render('Overview');
 });
 
 if (Meteor.isServer) {

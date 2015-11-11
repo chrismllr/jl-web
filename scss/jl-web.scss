@@ -53,7 +53,7 @@ body {
 		height: 100vh;
 		display: flex;
 		align-items: center;
-		overflow-x: hidden;
+		overflow: hidden;
 		width: 75vw;
 	}
 
@@ -63,6 +63,7 @@ body {
 		&__header {
 			height: 25vh;
 			width: 100vw;
+			align-items: center;
 		}
 
 		&__content {

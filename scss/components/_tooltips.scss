@@ -1,0 +1,33 @@
+.tooltip {
+  padding: .8em;
+  color: white;
+  background: palette(gray, dark);
+  font-size: 85%;
+  border-radius: 6px;
+  margin-top: -4px;
+  opacity: 0;
+
+  &.hide {
+    opacity: 0;
+  }
+
+  &.show {
+    opacity: 1;
+  }
+
+  &:after, &:before {
+    left: -6px;
+    top: 50%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    transform: translate3d(0, -40%, 0) rotate(45deg);
+  }
+
+  &:after {
+    border-color: palette(gray,dark);
+    border-width: 7px;
+  }
+}

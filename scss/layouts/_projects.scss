@@ -22,27 +22,37 @@
   }
 
   &__btn {
-    &--back,
-    &--fwd {
-      position: absolute;
-      bottom: 3px;
-      .arrow--back, .arrow--fwd {
-        height: 20px;
-        width: 20px;
+    cursor: pointer;
+    
+    svg {
+      path {
+        fill: $gray;
+        transition: .3s ease-in-out;
+      }
+    }
 
-        path { fill: $gray; }
+    .arrow--back, .arrow--fwd {
+      height: 20px;
+      width: 20px;
+    }
+
+    &:hover {
+      svg {
+        path { fill: palette(gray,x-dark); }
       }
     }
 
     &--back {
-      left: 2em;
       .arrow--back {
         transform: rotate(180deg);
       }
     }
 
-    &--fwd {
-      right: 2em;
+    @include gmq(palm) {
+      &--back,
+      &--fwd {
+        opacity: 0;
+      }
     }
   }
 
@@ -79,6 +89,17 @@
       height: 75vh;
     }
   }
+}
+
+.btn__group {
+  width: 4em;
+  height: 1em;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 7px;
+  align-items: center;
+  right: 12px;
 }
 
 .lightbox {
