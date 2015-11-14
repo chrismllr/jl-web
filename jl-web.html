@@ -44,11 +44,9 @@
 <template name="Projects">
   <div class="project__wrapper">
     {{#HammerTouchArea gestureMap=templateGestures}}
-      <img id="feature-img" src="{{currentFeatureImg.img}}" alt="" class="project__item project__item--featured" />
+      <img id="feature-img" src="{{currentFeatureImg.img}}" alt="" class="project__featured" />
     {{/HammerTouchArea}}
-    <!-- {{#each projects}}
-      <img src="{{img}}" class="project__item" alt="" />
-    {{/each}} -->
+
     <div class="btn__group">
       <button id="feature-img-back" type="button" name="button" class="project__btn project__btn--back">
         <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--back"/>
@@ -62,13 +60,6 @@
     </div>
 
   </div>
-
-
-  {{#if lightbox}}
-    <div class="lightbox">
-      <img src={{selectedProj.img}} alt="" />
-    </div>
-  {{/if}}
 </template>
 
 <template name="Contact">
@@ -99,5 +90,19 @@
 </template>
 
 <template name="Overview">
+  <div class="overview__wrapper">
+    {{#each category in projectCategories}}
+      <div class="overview__project">
+        {{#each (get projects category)}}
+          <img src="{{img}}" class="overview__project__item" alt="" />
+        {{/each}}
+      </div>
+    {{/each}}
 
+    {{#if lightbox}}
+      <div class="lightbox">
+        <img src={{selectedProj.img}} alt="" />
+      </div>
+    {{/if}}
+  </div>
 </template>
