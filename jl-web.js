@@ -65,7 +65,7 @@ if (Meteor.isClient) {
   // ---------------------------------------------------------
   Template.Header.helpers({
     isWork: function() {
-      return Router.current().location.get().path === '/' || '/overview';
+      return Router.current().location.get().path === '/';
     },
     isContact: function() {
       return Router.current().location.get().path === '/contact';
@@ -128,7 +128,7 @@ if (Meteor.isClient) {
         img.onload = function() {
           imgElem.attr('src', newProj.img);
           imgElem.fadeIn('fast');
-        }
+        };
 
         img.src = newProj.img;
       });
