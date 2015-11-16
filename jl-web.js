@@ -65,7 +65,7 @@ if (Meteor.isClient) {
   // ---------------------------------------------------------
   Template.Header.helpers({
     isWork: function() {
-      return Router.current().location.get().path === '/';
+      return Router.current().location.get().path === '/' || '/overview';
     },
     isContact: function() {
       return Router.current().location.get().path === '/contact';
@@ -123,8 +123,14 @@ if (Meteor.isClient) {
 
     if (canTransition || dir === 'fwd') {
       imgElem.fadeOut('fast', function () {
-        imgElem.attr('src', newProj.img);
-        imgElem.fadeIn('fast');
+        var img = new Image();
+
+        img.onload = function() {
+          imgElem.attr('src', newProj.img);
+          imgElem.fadeIn('fast');
+        }
+
+        img.src = newProj.img;
       });
     }
   };
