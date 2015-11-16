@@ -1,18 +1,31 @@
 .overview {
   &__wrapper {
-    height: 100vh;
+    height: 100%;
     width: 80vw;
+    overflow-y: auto;
+
+    @include gmq(portable) {
+      width: 100vw;
+      height: 100%;
+    }
   }
 
   &__project {
-    margin-top: 16px;
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 
     &:first-of-type {
-      margin-top: 20px;
+      margin-top: 16px;
     }
 
     &__item {
       height: 10em;
+      width: 10em;
+      background-position: 50% 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
       @extend %project-item;
     }
   }

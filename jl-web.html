@@ -94,7 +94,7 @@
     {{#each category in projectCategories}}
       <div class="overview__project">
         {{#each (get projects category)}}
-          <img src="{{img}}" class="overview__project__item" alt="" />
+          <div class="overview__project__item" style="background-image: url({{img}});"></div>
         {{/each}}
       </div>
     {{/each}}

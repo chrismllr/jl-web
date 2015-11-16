@@ -9,5 +9,10 @@
   .jl__logo {
     width: 224px;
     height: 34px;
+
+    @media (max-height: 370px) {
+  		height: 25px;
+      width: 160px;
+  	}
   }
 }

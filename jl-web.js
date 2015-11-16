@@ -194,6 +194,7 @@ if (Meteor.isClient) {
   Template.Overview.onCreated(function() {
     this.lightbox = new ReactiveVar(false);
     this.selectedProj = new ReactiveVar({});
+    $('body').addClass('overview');
   });
 
   Template.Overview.helpers({

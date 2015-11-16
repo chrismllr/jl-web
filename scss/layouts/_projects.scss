@@ -45,7 +45,7 @@
     }
 
     @include gmq(portable) {
-      height: 75vh;
+      height: 70vh;
       width: 100vw;
     }
   }
@@ -65,15 +65,19 @@
       width: 20px;
     }
 
-    &:hover {
-      svg {
-        path { fill: palette(gray,x-dark); }
-      }
-    }
-
     &--back {
       .arrow--back {
         transform: rotate(180deg);
+      }
+    }
+
+    &#to-grid {
+      margin-top: .1em;
+    }
+
+    &:hover {
+      svg {
+        path { fill: palette(gray,x-dark); }
       }
     }
 
@@ -88,9 +92,9 @@
   &__featured {
     @extend %project-item;
     height: 90vh;
-    
+
     @include gmq(portable) {
-      height: 75vh;
+      height: 70vh;
     }
   }
 }
@@ -103,5 +107,11 @@
   position: absolute;
   bottom: 7px;
   align-items: center;
-  right: 12px;
+  right: 25px;
+  transition: .3s ease-in-out;
+
+  @include gmq(palm) {
+    bottom: -3px;
+    right: -5px;
+  }
 }

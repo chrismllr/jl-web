@@ -14,16 +14,20 @@ projects:
 -
   img : /content/img003.jpg
   name : girl3
-  projectCategory : sub
+  projectCategory : main
 -
   img : /content/img005.jpg
   name : girl5
-  projectCategory : sub
+  projectCategory : main
 -
   img : /content/img006.jpg
   name : girl6
+  projectCategory : main
+-
+  img : /content/moto-example.png
+  name : girl7
   projectCategory : sub
 -
   img : /content/img007.jpg
-  name : girl7
+  name : girl8
   projectCategory : sub

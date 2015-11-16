@@ -67,8 +67,16 @@ body {
 		}
 
 		&__content {
-			height: 75vh;
+			height: 70vh;
 			width: 100vw;
+		}
+	}
+}
+
+body.overview {
+	@include gmq(portable) {
+		.site__content {
+			height: 75vh;
 		}
 	}
 }
