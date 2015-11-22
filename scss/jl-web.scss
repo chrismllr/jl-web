@@ -67,16 +67,9 @@ body {
 		}
 
 		&__content {
-			height: 70vh;
+			height: auto;
+			overflow: inherit;
 			width: 100vw;
-		}
-	}
-}
-
-body.overview {
-	@include gmq(portable) {
-		.site__content {
-			height: 75vh;
 		}
 	}
 }

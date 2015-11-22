@@ -3,10 +3,13 @@
     height: 100%;
     width: 80vw;
     overflow-y: auto;
+    margin-bottom: 16px;
 
     @include gmq(portable) {
       width: 100vw;
       height: 100%;
+      overflow-y: inherit;
+      padding: 0 3vw;
     }
   }
 
@@ -27,6 +30,11 @@
       background-size: cover;
       background-repeat: no-repeat;
       @extend %project-item;
+
+      @include gmq(palm) {
+        height: 6em;
+        width: 6em;
+      }
     }
   }
 }

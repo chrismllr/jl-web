@@ -71,10 +71,6 @@
       }
     }
 
-    &#to-grid {
-      margin-top: .1em;
-    }
-
     &:hover {
       svg {
         path { fill: palette(gray,x-dark); }
@@ -87,6 +83,12 @@
         opacity: 0;
       }
     }
+
+    @include gmq(desk) {
+      &#to-grid {
+        margin-top: .1em;
+      }
+    }
   }
 
   &__featured {
@@ -94,7 +96,9 @@
     height: 90vh;
 
     @include gmq(portable) {
-      height: 70vh;
+      height: inherit;
+      max-height: 70vh;
+      max-width: 95vw;
     }
   }
 }
@@ -110,8 +114,7 @@
   right: 25px;
   transition: .3s ease-in-out;
 
-  @include gmq(palm) {
-    bottom: -3px;
-    right: -5px;
+  @include gmq(portable) {
+    display: none;
   }
 }
