@@ -249,10 +249,29 @@ if (Meteor.isClient) {
       selectedProjInstance.set(this);
 
       setTimeout(function() {
-        $(document).one('click', function() {
-          lightboxInstance.set(!lightboxInstance.get());
-        });
+        var mySVGsToInject = document.querySelectorAll('img.inject-me');
+        SVGInjector(mySVGsToInject);
       }, 50);
+    },
+
+    'click .lightbox': function(e, t) {
+      var projects = Session.get('projects');
+      var selectedProjInstance = t.selectedProj;
+      var curProjImg = selectedProjInstance.curValue.img;
+      var curIndex = projects.map(function (proj) { return proj.img; }).indexOf(curProjImg);
+      var nextProj = projects[curIndex + 1];
+
+      if (nextProj) {
+        selectedProjInstance.set(nextProj);
+      } else {
+        selectedProjInstance.set(projects[0]);
+      }
+    },
+
+    'click #close-lightbox': function(e, t) {
+      var lightboxInstance = t.lightbox;
+
+      lightboxInstance.set(!lightboxInstance.get());
     }
   });
 }

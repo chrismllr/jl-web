@@ -49,6 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   animation: fadeIn .5s;
   animation-fill-mode: both;
@@ -57,9 +58,25 @@
     @include s-overlay(black, .9);
   }
 
-  img {
+  &__selected-img {
     max-height: 95vh;
     max-width: 95vw;
     z-index: 100;
+  }
+
+  &--close {
+    background: transparent;
+    border: none;
+    z-index: 100;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+
+    svg {
+      opacity: .7;
+      height: 30px;
+      width: 30px;
+      path {fill: $white; }
+    }
   }
 }

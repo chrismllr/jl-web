@@ -10,13 +10,9 @@ $size_base_small: .875em;
   font-family: 'Inconsolata', 'Monaco', monospace;
 }
 
-@mixin script_font {
-  font-family: 'Satisfy', sans-serif;
-}
-
 h1,
 h2 {
-  @include secondary_font();
+  @include primary_font();
   color: palette(gray,x-dark);
   margin: .5em 0;
 }
@@ -27,7 +23,7 @@ h5,
 h6,
 p,
 span {
-  @include secondary_font();
+  @include primary_font();
   color: palette(gray,x-dark);
   margin: 0;
 }

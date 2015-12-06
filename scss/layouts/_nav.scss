@@ -14,8 +14,6 @@
   	}
 
     &__item {
-      @include secondary_font();
-
       a {
         color: palette(gray);
         text-decoration: none;

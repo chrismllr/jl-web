@@ -23,7 +23,11 @@
 
 .user {
   &__details {
-    padding: 0 0 3.6em;
+    padding: 0 0 2.6em;
+
+    h6 {
+      margin-bottom: 0.4em;
+    }
   }
 
   &__img {

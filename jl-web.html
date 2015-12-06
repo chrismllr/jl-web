@@ -3,7 +3,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"> -->
   <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Patua+One|Satisfy|Source+Sans+Pro:400,300,600,700,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,700,900,300,300italic' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -65,7 +66,6 @@
 <template name="Contact">
   <div class="contact__wrapper">
     <section class="user__details">
-      <div class="user__img" style="background-image: url({{userImg}})"></div>
       <h6>Justin Leveritt</h6>
       <p>Justin is a photographer based in Dallas, TX.</p>
     </section>
@@ -101,7 +101,10 @@
 
     {{#if lightbox}}
       <div class="lightbox">
-        <img src={{selectedProj.img}} alt="" />
+        <img src={{selectedProj.img}} class="lightbox__selected-img" alt="" />
+        <button type="button" id="close-lightbox" class='btn--transparent lightbox--close'>
+          <img src='/assets/cross.svg' class="inject-me" alt="" />
+        </button>
       </div>
     {{/if}}
   </div>
