@@ -4,6 +4,7 @@
 
     a {
       text-decoration: none;
+      outline: 0;
     }
   }
 
@@ -12,11 +13,11 @@
     width: 20px;
     margin-right: 1em;
     cursor: pointer;
-    opacity: .5;
-    transition: .3s ease-in-out;
+
+    path { fill: $gray; transition: .3s ease-in-out; }
 
     &:hover {
-      opacity: 1;
+      path { fill: palette(gray,x-dark); }
     }
   }
 }

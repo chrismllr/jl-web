@@ -22,10 +22,6 @@ projects:
 -
   img : /content/img006.jpg
   name : girl6
-  projectCategory : main
--
-  img : /content/moto-example.png
-  name : girl7
   projectCategory : sub
 -
   img : /content/img007.jpg

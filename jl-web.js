@@ -69,7 +69,10 @@ if (Meteor.isClient) {
     },
     isContact: function() {
       return Router.current().location.get().path === '/contact';
-    }
+    },
+    isOverview: function() {
+      return Router.current().location.get().path === '/overview';
+    },
   });
 
 
@@ -136,10 +139,6 @@ if (Meteor.isClient) {
   };
 
   Template.Projects.events({
-    'click #feature-img': function(e, t) {
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
-    },
-
     'click #feature-img-fwd': function(e, t) {
       navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
     },
@@ -168,6 +167,11 @@ if (Meteor.isClient) {
   // ---------------------------------------------------------
   Template.Contact.helpers({
     userImg: '/assets/justin.png'
+  });
+
+  Template.Contact.onRendered(function() {
+    var mySVGsToInject = document.querySelectorAll('img.inject-me');
+    SVGInjector(mySVGsToInject);
   });
 
   var copyClipboard = function(txt) {
@@ -199,13 +203,18 @@ if (Meteor.isClient) {
 
   Template.Overview.onCreated(function() {
     this.lightbox = new ReactiveVar(false);
-    this.selectedProj = new ReactiveVar({});
+    this.currentFeatureImg = new ReactiveVar({});
     $('body').addClass('overview');
   });
 
   Template.Overview.helpers({
     lightbox: function() {
       return Template.instance().lightbox.get();
+    },
+
+    currentFeatureImg: function() {
+      Template.instance().currentFeatureImg.set(Session.get('projects')[0]);
+      return Session.get('projects')[0];
     },
 
     projectCategories: function() {
@@ -234,19 +243,19 @@ if (Meteor.isClient) {
       return {};
     },
 
-    selectedProj: function() {
-      return Template.instance().selectedProj.get();
+    currentFeatureImg: function() {
+      return Template.instance().currentFeatureImg.get();
     }
   });
 
   Template.Overview.events({
     'click .overview__project__item': function(e, t) {
       var lightboxInstance = t.lightbox;
-      var selectedProjInstance = t.selectedProj;
+      var currentFeatureImgInstance = t.currentFeatureImg;
       var curLightboxVal = lightboxInstance.get();
 
       lightboxInstance.set(!curLightboxVal);
-      selectedProjInstance.set(this);
+      currentFeatureImgInstance.set(this);
 
       setTimeout(function() {
         var mySVGsToInject = document.querySelectorAll('img.inject-me');
@@ -256,15 +265,15 @@ if (Meteor.isClient) {
 
     'click .lightbox': function(e, t) {
       var projects = Session.get('projects');
-      var selectedProjInstance = t.selectedProj;
-      var curProjImg = selectedProjInstance.curValue.img;
+      var currentFeatureImgInstance = t.currentFeatureImg;
+      var curProjImg = currentFeatureImgInstance.curValue.img;
       var curIndex = projects.map(function (proj) { return proj.img; }).indexOf(curProjImg);
       var nextProj = projects[curIndex + 1];
 
       if (nextProj) {
-        selectedProjInstance.set(nextProj);
+        currentFeatureImgInstance.set(nextProj);
       } else {
-        selectedProjInstance.set(projects[0]);
+        currentFeatureImgInstance.set(projects[0]);
       }
     },
 

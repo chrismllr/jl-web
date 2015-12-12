@@ -36,6 +36,11 @@
           <li class="nav__list__item {{#if isContact}}active{{/if}}">
             <a href="/contact">contact</a>
           </li>
+          <li class="nav__list__item {{#if isOverview}}active{{/if}}">
+            <a href="/overview">
+              <img src="/assets/grid.svg" alt="" class="inject-me nav__overview"/>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -48,17 +53,13 @@
       <img id="feature-img" src="{{currentFeatureImg.img}}" alt="" class="project__featured" />
     {{/HammerTouchArea}}
 
-    <div class="btn__group">
-      <button id="feature-img-back" type="button" name="button" class="project__btn project__btn--back">
-        <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--back"/>
-      </button>
-      <a id="to-grid" href="/overview" class="project__btn">
-        <img src="/assets/grid.svg" alt="" class="inject-me"/>
-      </a>
-      <button id="feature-img-fwd" type="button" name="button" class="project__btn project__btn--fwd">
-        <img src="/assets/arrow-right.svg" alt="" class="inject-me arrow--fwd"/>
-      </button>
-    </div>
+    <button id="feature-img-back"
+      type="button"
+      class="project__btn project__btn--back"></button>
+
+    <button id="feature-img-fwd"
+      type="button"
+      class="project__btn project__btn--fwd"></button>
 
   </div>
 </template>
@@ -71,10 +72,10 @@
     </section>
 
     <a href="http://instagram.com/jleveritt_/" target="_blank">
-      <img class="contact__icon" src="/assets/instagram.svg" alt="" />
+      <img class="contact__icon inject-me" src="/assets/instagram.svg" alt="" />
     </a>
     <a href="http://twitter.com/JLeveritt_" target="_blank">
-      <img class="contact__icon" src="/assets/twitter.svg" alt="" />
+      <img class="contact__icon inject-me" src="/assets/twitter.svg" alt="" />
     </a>
     <a href="#"
       id="copy-email"
@@ -82,7 +83,7 @@
       data-tooltip-direction="e"
       data-tooltip-trigger="click"
       data-email="justin.leveritt@gmail.com">
-      <img class="contact__icon" src="/assets/email.svg" alt="" />
+      <img class="contact__icon inject-me" src="/assets/email.svg" alt="" />
     </a>
 
     {{ > tooltips }}
@@ -101,7 +102,7 @@
 
     {{#if lightbox}}
       <div class="lightbox">
-        <img src={{selectedProj.img}} class="lightbox__selected-img" alt="" />
+        <img id="feature-img" src={{currentFeatureImg.img}} class="lightbox__selected-img" alt="" />
         <button type="button" id="close-lightbox" class='btn--transparent lightbox--close'>
           <img src='/assets/cross.svg' class="inject-me" alt="" />
         </button>

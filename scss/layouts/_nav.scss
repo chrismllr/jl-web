@@ -1,6 +1,4 @@
 .nav {
-  // border-bottom: 1px solid palette(gray,dark);
-
   &__list {
     margin: .5em 0;
     padding: 0;
@@ -14,20 +12,36 @@
   	}
 
     &__item {
+      margin-right: 1em;
       a {
-        color: palette(gray);
+        outline: 0;
+        color: $gray;
         text-decoration: none;
+
+        svg {
+          path { fill: $gray; }
+        }
       }
 
       &.active {
         a {
-          color: palette(gray, x-dark)
+          color: palette(gray, x-dark);
+          svg {
+            path { fill: palette(gray, x-dark); }
+          }
         }
+
       }
 
-      &:first-of-type {
-        margin-right: 1em;
+      &:last-of-type {
+        margin-right: 0;
       }
     }
+  }
+
+  &__overview {
+    height: 20px;
+    width: 20px;
+    margin-top: 5px;
   }
 }
