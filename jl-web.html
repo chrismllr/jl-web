@@ -25,21 +25,19 @@
 <template name="Header">
   <section class='intro section--sm'>
     <div class="intro__content">
-      <h2>
-        <img src="/assets/jleveritt.svg" class="inject-me jl__logo" />
-      </h2>
+      <a href="/">
+        <h2>
+          <img src="/assets/jleveritt-logo-lg.svg" class="inject-me jl__logo--lg" />
+          <img src="/assets/jleveritt.svg" class="inject-me jl__logo--sm" />
+        </h2>
+      </a>
       <nav class="nav">
         <ul class="nav__list">
-          <li class="nav__list__item {{#if isWork}}active{{/if}}">
-            <a href="/">work</a>
+          <li class="nav__list__item {{#if isOverview}}active{{/if}}">
+            <a href="/overview">work</a>
           </li>
           <li class="nav__list__item {{#if isContact}}active{{/if}}">
             <a href="/contact">contact</a>
-          </li>
-          <li class="nav__list__item {{#if isOverview}}active{{/if}}">
-            <a href="/overview">
-              <img src="/assets/grid.svg" alt="" class="inject-me nav__overview"/>
-            </a>
           </li>
         </ul>
       </nav>

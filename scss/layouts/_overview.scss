@@ -54,6 +54,11 @@
   animation: fadeIn .5s;
   animation-fill-mode: both;
 
+  &.exiting {
+    animation: fadeOut .5s;
+    animation-fill-mode: both;
+  }
+
   &:after {
     @include s-overlay(black, .9);
   }
@@ -67,9 +72,10 @@
   &--close {
     background: transparent;
     border: none;
-    z-index: 100;
+    z-index: 100000;
     position: absolute;
     top: 1em;
+    outline: none;
     right: 1em;
 
     svg {

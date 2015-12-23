@@ -64,9 +64,6 @@ if (Meteor.isClient) {
   // Header
   // ---------------------------------------------------------
   Template.Header.helpers({
-    isWork: function() {
-      return Router.current().location.get().path === '/';
-    },
     isContact: function() {
       return Router.current().location.get().path === '/contact';
     },
@@ -279,8 +276,13 @@ if (Meteor.isClient) {
 
     'click #close-lightbox': function(e, t) {
       var lightboxInstance = t.lightbox;
+      var curLightboxVal = lightboxInstance.get();
 
-      lightboxInstance.set(!lightboxInstance.get());
+      $('.lightbox').addClass('exiting');
+      setTimeout(function() {
+        lightboxInstance.set(!curLightboxVal);
+      },500);
+
     }
   });
 }

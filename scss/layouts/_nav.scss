@@ -1,4 +1,8 @@
 .nav {
+  @include gmq(desk) {
+    padding: 0 5px;
+  }
+
   &__list {
     margin: .5em 0;
     padding: 0;
@@ -16,6 +20,8 @@
       a {
         outline: 0;
         color: $gray;
+        font-size: .875em;
+        font-weight: 400;
         text-decoration: none;
 
         svg {
