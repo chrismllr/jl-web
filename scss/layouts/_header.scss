@@ -6,32 +6,32 @@
     margin: 0;
   }
 
-  .jl__logo--sm {
-    width: 224px;
-    height: 34px;
-    display: none;
-
+  .jl__logo {
     path { fill: palette(gray, x-dark); }
 
-    @media (max-height: 370px) {
-  		height: 25px;
-      width: 160px;
-  	}
-
-    @include gmq(portable) {
-      display: inline-block;
-    }
-  }
-
-  .jl__logo--lg {
-    width: 186px;
-    height: 100px;
-    display: inline-block;
-
-    path { fill: palette(gray, x-dark); }
-
-    @include gmq(portable) {
+    &--sm {
+      width: 224px;
+      height: 34px;
       display: none;
+
+      @media (max-height: 370px) {
+    		height: 25px;
+        width: 160px;
+    	}
+
+      @include gmq(portable) {
+        display: inline-block;
+      }
+    }
+
+    &--lg {
+      width: 186px;
+      height: 100px;
+      display: inline-block;
+
+      @include gmq(portable) {
+        display: none;
+      }
     }
   }
 }
