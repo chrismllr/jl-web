@@ -173,6 +173,7 @@ if (Meteor.isClient) {
 
   var copyClipboard = function(txt) {
     var textArea = document.createElement("textarea");
+    textArea.id = 'copy-email-textarea'
     textArea.style.position = 'fixed';
     textArea.style.top = 0;
     textArea.style.left = 0;
@@ -180,7 +181,7 @@ if (Meteor.isClient) {
 
     textArea.value = txt;
     document.body.appendChild(textArea);
-    textArea.select();
+    document.getElementById('copy-email-textarea').select();
 
     document.execCommand('copy');
   };
