@@ -21,7 +21,6 @@ insecure                # Allow all DB writes from clients (for prototyping)
 fourseven:scss
 iron:router
 reactive-var
-richsilv:owl-carousel
 monbro:yaml-config-loader
 johnantoni:meteor-svginjector
 chriswessels:hammer

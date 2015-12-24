@@ -260,7 +260,7 @@ if (Meteor.isClient) {
       }, 50);
     },
 
-    'click .lightbox': function(e, t) {
+    'click #feature-img': function(e, t) {
       var projects = Session.get('projects');
       var currentFeatureImgInstance = t.currentFeatureImg;
       var curProjImg = currentFeatureImgInstance.curValue.img;
