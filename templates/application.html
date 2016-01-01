@@ -1,0 +1,11 @@
+<template name="Application">
+  <div class='site'>
+    <div class="site__header" id='site-header'>
+      {{> Header}}
+    </div>
+
+    <div class="site__content" id='site-content'>
+      {{> yield}}
+    </div>
+  </div>
+</template>

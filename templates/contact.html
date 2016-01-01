@@ -1,0 +1,25 @@
+<template name="Contact">
+  <div class="contact__wrapper">
+    <section class="user__details">
+      <h6>Justin Leveritt</h6>
+      <p>Justin is a photographer based in Dallas, TX.</p>
+    </section>
+
+    <a href="http://instagram.com/jleveritt_" target="_blank">
+      <img class="contact__icon inject-me" src="/assets/instagram.svg" alt="instagram" />
+    </a>
+    <a href="http://twitter.com/JLeveritt_" target="_blank">
+      <img class="contact__icon inject-me" src="/assets/twitter.svg" alt="twitter" />
+    </a>
+    <a href="#"
+      id="copy-email"
+      data-tooltip="e-mail address copied to clipboard"
+      data-tooltip-direction="e"
+      data-tooltip-trigger="click"
+      data-email="justin.leveritt@gmail.com">
+      <img class="contact__icon inject-me" src="/assets/email.svg" alt="" />
+    </a>
+
+    {{ > tooltips }}
+  </div>
+</template>

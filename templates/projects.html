@@ -1,0 +1,16 @@
+<template name="Projects">
+  <div class="project__wrapper">
+    {{#HammerTouchArea gestureMap=templateGestures}}
+      <img id="feature-img" src="{{currentFeatureImg.img}}" alt="" class="project__featured" />
+    {{/HammerTouchArea}}
+
+    <button id="feature-img-back"
+      type="button"
+      class="project__btn project__btn--back"></button>
+
+    <button id="feature-img-fwd"
+      type="button"
+      class="project__btn project__btn--fwd"></button>
+
+  </div>
+</template>

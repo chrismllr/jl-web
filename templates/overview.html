@@ -1,0 +1,20 @@
+<template name="Overview">
+  <div class="overview__wrapper">
+    {{#each category in projectCategories}}
+      <div class="overview__project">
+        {{#each (get projects category)}}
+          <div class="overview__project__item" style="background-image: url({{img}});"></div>
+        {{/each}}
+      </div>
+    {{/each}}
+
+    {{#if lightbox}}
+      <div class="lightbox">
+        <img id="feature-img" src={{currentFeatureImg.img}} class="lightbox__selected-img" alt="" />
+        <button type="button" id="close-lightbox" class='btn--transparent lightbox--close'>
+          <img src='/assets/cross.svg' class="inject-me" alt="close" />
+        </button>
+      </div>
+    {{/if}}
+  </div>
+</template>
