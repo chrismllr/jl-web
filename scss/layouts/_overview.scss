@@ -73,6 +73,10 @@
     z-index: 100;
     background: transparent;
     border: none;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   &--close {

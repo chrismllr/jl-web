@@ -47,7 +47,7 @@ Template.Overview.helpers({
     return Template.instance().lightbox.get();
   },
 
-  currentFeatureImg: function() {
+  featureImg: function() {
     Template.instance().currentFeatureImg.set(Session.get('projects')[0]);
     return Session.get('projects')[0];
   },
@@ -76,10 +76,14 @@ Template.Overview.helpers({
       }, {});
     }
     return {};
+  },
+
+  currentFeatureImg: function() {
+    return Template.instance().currentFeatureImg.get();
   }
 });
 
-var navigate = function(t, projects, dir) {
+var navigateLightbox = function(t, projects, dir) {
   var currentFeatureImgInstance = t.currentFeatureImg;
   var curProjImg = currentFeatureImgInstance.curValue.img;
   var curIndex = projects.map(function (proj) {
@@ -105,16 +109,16 @@ Template.Overview.events({
 
     setTimeout(function() {
       var mySVGsToInject = document.querySelectorAll('img.inject-me');
-      SVGInjector(mySVGsToInject);
+      new SVGInjector(mySVGsToInject);
     }, 50);
   },
 
   'click #lightbox-img-back': function(e, t) {
-    navigate(t, Session.get('projects'), 'back');
+    navigateLightbox(t, Session.get('projects'), 'back');
   },
 
   'click #lightbox-img-fwd': function(e, t) {
-    navigate(t, Session.get('projects'), 'fwd');
+    navigateLightbox(t, Session.get('projects'), 'fwd');
   },
 
   'click #close-lightbox': function(e, t) {

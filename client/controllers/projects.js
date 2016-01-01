@@ -41,7 +41,7 @@ Template.Projects.onCreated(function() {
 
 Template.Projects.onRendered(function() {
   var mySVGsToInject = document.querySelectorAll('img.inject-me');
-  SVGInjector(mySVGsToInject);
+  new SVGInjector(mySVGsToInject);
 
   attachProjectsEvents();
 });

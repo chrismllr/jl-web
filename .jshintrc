@@ -10,7 +10,8 @@
     "ReactiveVar",
     "Tooltips",
     "$",
-    "Router"
+    "Router",
+    "SVGInjector"
   ],
   "browser": true,
   "boss": true,

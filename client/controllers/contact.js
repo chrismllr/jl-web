@@ -8,7 +8,7 @@ Template.Contact.helpers({
 
 Template.Contact.onRendered(function() {
   var mySVGsToInject = document.querySelectorAll('img.inject-me');
-  SVGInjector(mySVGsToInject);
+  new SVGInjector(mySVGsToInject);
 });
 
 var copyClipboard = function(txt, cb) {
