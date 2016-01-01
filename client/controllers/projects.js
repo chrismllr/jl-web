@@ -42,7 +42,37 @@ Template.Projects.onCreated(function() {
 Template.Projects.onRendered(function() {
   var mySVGsToInject = document.querySelectorAll('img.inject-me');
   SVGInjector(mySVGsToInject);
+
+  attachProjectsEvents();
 });
+
+Template.Projects.onDestroyed(function() {
+  detachProjectsEvents();
+});
+
+var attachProjectsEvents = function() {
+  document.getElementById('body').addEventListener('keyup', function(e, t) {
+    e.preventDefault();
+    var FWD = 39;
+    var BACK = 37;
+
+    if (e.keyCode === FWD) {
+      var fwdBtn = document.getElementById('feature-img-fwd');
+      if (fwdBtn) {
+        fwdBtn.click();
+      }
+    } else if (e.keyCode === BACK) {
+      var backBtn = document.getElementById('feature-img-back');
+      if (backBtn) {
+        backBtn.click();
+      }
+    }
+  });
+}
+
+var detachProjectsEvents = function() {
+  document.getElementById('body').removeEventListener('keyup');
+}
 
 Template.Projects.helpers({
   projects: function() {
@@ -69,17 +99,5 @@ Template.Projects.events({
 
   'click #feature-img-back': function(e, t) {
     navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
-  },
-
-  'keyup': function(e, t) {
-    e.preventDefault();
-    var FWD = 39;
-    var BACK = 37;
-
-    if (e.keyCode === FWD) {
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
-    } else if (e.keyCode === BACK) {
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
-    }
   }
 });

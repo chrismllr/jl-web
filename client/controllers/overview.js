@@ -8,6 +8,38 @@ Template.Overview.onCreated(function() {
   $('body').addClass('overview');
 });
 
+Template.Overview.onRendered(function() {
+  attachOverviewEvents();
+});
+
+Template.Projects.onDestroyed(function() {
+  detachOverviewEvents();
+});
+
+var attachOverviewEvents = function() {
+  document.getElementById('body').addEventListener('keyup', function(e, t) {
+    e.preventDefault();
+    var FWD = 39;
+    var BACK = 37;
+
+    if (e.keyCode === FWD) {
+      var fwdBtn = document.getElementById('feature-img-fwd');
+      if (fwdBtn) {
+        fwdBtn.click();
+      }
+    } else if (e.keyCode === BACK) {
+      var backBtn = document.getElementById('feature-img-back');
+      if (backBtn) {
+        backBtn.click();
+      }
+    }
+  });
+}
+
+var detachOverviewEvents = function() {
+  document.getElementById('body').removeEventListener('keyup');
+}
+
 Template.Overview.helpers({
   lightbox: function() {
     return Template.instance().lightbox.get();
@@ -49,6 +81,21 @@ Template.Overview.helpers({
   }
 });
 
+var navigate = function(t, projects, dir) {
+  var currentFeatureImgInstance = t.currentFeatureImg;
+  var curProjImg = currentFeatureImgInstance.curValue.img;
+  var curIndex = projects.map(function (proj) {
+    return proj.img;
+  }).indexOf(curProjImg);
+  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
+
+  if (nextProj) {
+    currentFeatureImgInstance.set(nextProj);
+  } else {
+    currentFeatureImgInstance.set(projects[0]);
+  }
+}
+
 Template.Overview.events({
   'click .overview__project__item': function(e, t) {
     var lightboxInstance = t.lightbox;
@@ -64,18 +111,12 @@ Template.Overview.events({
     }, 50);
   },
 
-  'click #feature-img': function(e, t) {
-    var projects = Session.get('projects');
-    var currentFeatureImgInstance = t.currentFeatureImg;
-    var curProjImg = currentFeatureImgInstance.curValue.img;
-    var curIndex = projects.map(function (proj) { return proj.img; }).indexOf(curProjImg);
-    var nextProj = projects[curIndex + 1];
+  'click #feature-img-back': function(e, t) {
+    navigate(t, Session.get('projects'), 'back');
+  },
 
-    if (nextProj) {
-      currentFeatureImgInstance.set(nextProj);
-    } else {
-      currentFeatureImgInstance.set(projects[0]);
-    }
+  'click #feature-img-fwd': function(e, t) {
+    navigate(t, Session.get('projects'), 'fwd');
   },
 
   'click #close-lightbox': function(e, t) {

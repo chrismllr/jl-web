@@ -10,10 +10,19 @@
 
     {{#if lightbox}}
       <div class="lightbox">
-        <img id="feature-img" src={{currentFeatureImg.img}} class="lightbox__selected-img" alt="" />
+        <img id="feature-img" src={{currentFeatureImg.img}} class="lightbox__selected-img" alt={{currentFeatureImg.name}} />
+
         <button type="button" id="close-lightbox" class='btn--transparent lightbox--close'>
           <img src='/assets/cross.svg' class="inject-me" alt="close" />
         </button>
+
+        <button id="feature-img-back"
+          type="button"
+          class="project__btn project__btn--back"></button>
+
+        <button id="feature-img-fwd"
+          type="button"
+          class="project__btn project__btn--fwd"></button>
       </div>
     {{/if}}
   </div>
