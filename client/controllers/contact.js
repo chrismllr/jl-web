@@ -13,7 +13,7 @@ Template.Contact.onRendered(function() {
 
 var copyClipboard = function(txt, cb) {
   var textArea = document.createElement("textarea");
-  textArea.id = 'copy-email-textarea'
+  textArea.id = 'copy-email-textarea';
   textArea.style.position = 'fixed';
   textArea.style.top = 0;
   textArea.style.left = 0;
@@ -34,7 +34,7 @@ var copyClipboard = function(txt, cb) {
 };
 
 Template.Contact.events({
-  'click #copy-email': function(e, t) {
+  'click #copy-email': function(e) {
     var txt = e.currentTarget.getAttribute('data-email');
 
     copyClipboard(txt, function(result) {

@@ -51,28 +51,30 @@ Template.Projects.onDestroyed(function() {
 });
 
 var attachProjectsEvents = function() {
-  document.getElementById('body').addEventListener('keyup', function(e, t) {
-    e.preventDefault();
-    var FWD = 39;
-    var BACK = 37;
-
-    if (e.keyCode === FWD) {
-      var fwdBtn = document.getElementById('feature-img-fwd');
-      if (fwdBtn) {
-        fwdBtn.click();
-      }
-    } else if (e.keyCode === BACK) {
-      var backBtn = document.getElementById('feature-img-back');
-      if (backBtn) {
-        backBtn.click();
-      }
-    }
-  });
-}
+  document.getElementById('body').addEventListener('keyup', projectKeyup, false);
+};
 
 var detachProjectsEvents = function() {
-  document.getElementById('body').removeEventListener('keyup');
-}
+  document.getElementById('body').removeEventListener('keyup', projectKeyup, false);
+};
+
+var projectKeyup = function(e) {
+  e.preventDefault();
+  var FWD = 39;
+  var BACK = 37;
+
+  if (e.keyCode === FWD) {
+    var fwdBtn = document.getElementById('feature-img-fwd');
+    if (fwdBtn) {
+      fwdBtn.click();
+    }
+  } else if (e.keyCode === BACK) {
+    var backBtn = document.getElementById('feature-img-back');
+    if (backBtn) {
+      backBtn.click();
+    }
+  }
+};
 
 Template.Projects.helpers({
   projects: function() {

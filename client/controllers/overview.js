@@ -17,28 +17,30 @@ Template.Projects.onDestroyed(function() {
 });
 
 var attachOverviewEvents = function() {
-  document.getElementById('body').addEventListener('keyup', function(e, t) {
-    e.preventDefault();
-    var FWD = 39;
-    var BACK = 37;
-
-    if (e.keyCode === FWD) {
-      var fwdBtn = document.getElementById('feature-img-fwd');
-      if (fwdBtn) {
-        fwdBtn.click();
-      }
-    } else if (e.keyCode === BACK) {
-      var backBtn = document.getElementById('feature-img-back');
-      if (backBtn) {
-        backBtn.click();
-      }
-    }
-  });
-}
+  document.getElementById('body').addEventListener('keyup', overviewKeyup, false);
+};
 
 var detachOverviewEvents = function() {
-  document.getElementById('body').removeEventListener('keyup');
-}
+  document.getElementById('body').removeEventListener('keyup', overviewKeyup, false);
+};
+
+var overviewKeyup = function(e) {
+  e.preventDefault();
+  var FWD = 39;
+  var BACK = 37;
+
+  if (e.keyCode === FWD) {
+    var fwdBtn = document.getElementById('lightbox-img-fwd');
+    if (fwdBtn) {
+      fwdBtn.click();
+    }
+  } else if (e.keyCode === BACK) {
+    var backBtn = document.getElementById('lightbox-img-back');
+    if (backBtn) {
+      backBtn.click();
+    }
+  }
+};
 
 Template.Overview.helpers({
   lightbox: function() {
@@ -74,10 +76,6 @@ Template.Overview.helpers({
       }, {});
     }
     return {};
-  },
-
-  currentFeatureImg: function() {
-    return Template.instance().currentFeatureImg.get();
   }
 });
 
@@ -94,7 +92,7 @@ var navigate = function(t, projects, dir) {
   } else {
     currentFeatureImgInstance.set(projects[0]);
   }
-}
+};
 
 Template.Overview.events({
   'click .overview__project__item': function(e, t) {
@@ -111,11 +109,11 @@ Template.Overview.events({
     }, 50);
   },
 
-  'click #feature-img-back': function(e, t) {
+  'click #lightbox-img-back': function(e, t) {
     navigate(t, Session.get('projects'), 'back');
   },
 
-  'click #feature-img-fwd': function(e, t) {
+  'click #lightbox-img-fwd': function(e, t) {
     navigate(t, Session.get('projects'), 'fwd');
   },
 

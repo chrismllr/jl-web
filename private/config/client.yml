@@ -9,11 +9,11 @@ projects:
   projectCategory : main
 -
   img : /content/img004.jpg
-  name : girl4
+  name : girl3
   projectCategory : main
 -
   img : /content/img003.jpg
-  name : girl3
+  name : girl4
   projectCategory : main
 -
   img : /content/img005.jpg
@@ -25,5 +25,5 @@ projects:
   projectCategory : sub
 -
   img : /content/img007.jpg
-  name : girl8
+  name : girl7
   projectCategory : sub
