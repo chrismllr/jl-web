@@ -22,8 +22,8 @@ projects:
 -
   img : /content/img006.jpg
   name : girl6
-  projectCategory : sub
+  projectCategory : main
 -
   img : /content/img007.jpg
   name : girl7
-  projectCategory : sub
+  projectCategory : main

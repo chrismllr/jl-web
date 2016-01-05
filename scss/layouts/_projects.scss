@@ -54,12 +54,13 @@
     cursor: pointer;
     position: absolute;
     height: 100%;
-    width: 50%;
 
     &--back {
+      width: 40%;
       left: 0;
     }
     &--fwd {
+      width: 60%;
       right: 0;
     }
     &--overview {

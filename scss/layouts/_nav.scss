@@ -4,7 +4,7 @@
   }
 
   &__list {
-    margin: .5em 0;
+    margin: -0.2em 0em 0em 0.1em;
     padding: 0;
     list-style: none;
     display: flex;
@@ -16,13 +16,15 @@
   	}
 
     &__item {
-      margin-right: 1em;
+      margin-right: .6em;
+
       a {
         outline: 0;
         color: lighten(palette(gray,dark), 15%);
         font-size: .875em;
-        font-weight: 400;
+        font-weight: 300;
         text-decoration: none;
+        letter-spacing: 1px;
       }
 
       &.active {
