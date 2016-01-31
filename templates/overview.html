@@ -3,7 +3,7 @@
     {{#each category in projectCategories}}
       <div class="overview__project">
         {{#each (get projects category)}}
-          <div class="overview__project__item" style="background-image: url({{img}});"></div>
+          <div class="overview__project__item" style="background-image: url({{thumb}});"></div>
         {{/each}}
       </div>
     {{/each}}
