@@ -19,7 +19,7 @@
 
   @for $i from 1 through 100 {
     $sub: 1;
-    $div: 10;
+    $div: 40;
 
     &:nth-child(#{$i}) {
       animation-delay: #{($i - $sub) / $div}s;
