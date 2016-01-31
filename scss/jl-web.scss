@@ -34,7 +34,7 @@ body {
 
 		@include gmq(portable) {
 			.site__content {
-					height: 75vh;
+				height: 75vh;
 			}
 		}
 	}
@@ -42,6 +42,18 @@ body {
 	&.projects {
 		overflow: hidden;
 		position: fixed;
+
+		&.safari {
+			@include gmq(portable) {
+				.site__header {
+					height: 20vh;
+				}
+				.site__content {
+					height: 80vh;
+					padding-bottom: 44px;
+				}
+			}
+		}
 	}
 
 	@media (max-width: 64em) {
