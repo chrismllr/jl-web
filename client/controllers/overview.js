@@ -80,6 +80,25 @@ Template.Overview.helpers({
 
   currentFeatureImg: function() {
     return Template.instance().currentFeatureImg.get();
+  },
+
+  templateGestures: {
+    'swipeleft #lightbox-img-back': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Session.get('projects'), 'fwd');
+    },
+    'swiperight #lightbox-img-back': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Session.get('projects'), 'back');
+    },
+    'swipeleft #lightbox-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Session.get('projects'), 'fwd');
+    },
+    'swiperight #lightbox-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Session.get('projects'), 'back');
+    }
   }
 });
 
@@ -89,12 +108,17 @@ var navigateLightbox = function(t, projects, dir) {
   var curIndex = projects.map(function (proj) {
     return proj.img;
   }).indexOf(curProjImg);
+
   var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
 
   if (nextProj) {
     currentFeatureImgInstance.set(nextProj);
   } else {
-    currentFeatureImgInstance.set(projects[0]);
+    if (dir === 'fwd') {
+      currentFeatureImgInstance.set(projects[0]);
+    } else {
+      currentFeatureImgInstance.set(projects[projects.length - 1]);
+    }
   }
 };
 
@@ -104,6 +128,7 @@ Template.Overview.events({
     var currentFeatureImgInstance = t.currentFeatureImg;
     var curLightboxVal = lightboxInstance.get();
 
+    $('body').addClass('no-scroll');
     lightboxInstance.set(!curLightboxVal);
     currentFeatureImgInstance.set(this);
 
@@ -125,7 +150,9 @@ Template.Overview.events({
     var lightboxInstance = t.lightbox;
     var curLightboxVal = lightboxInstance.get();
 
+    $('body').removeClass('no-scroll');
     $('.lightbox').addClass('exiting');
+
     setTimeout(function() {
       lightboxInstance.set(!curLightboxVal);
     },500);

@@ -8,31 +8,31 @@ var navigateFeature = function(ftImg, projects, elem, dir) {
   var curIndex = projects.map(function (proj) {
     return proj.img;
   }).indexOf(currentFeatureImgPath);
-  var newProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
-  var canTransition = false;
 
-  if (newProj) {
-    currentFeatureImgInstance.set(newProj);
-    canTransition = true;
-  } else {
-    newProj = Session.get('projects')[0];
-    currentFeatureImgInstance.set(newProj);
+  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
+
+  if (!nextProj) {
+    if (dir !== 'fwd') {
+      nextProj = projects[projects.length - 1];
+    } else {
+      nextProj = projects[0];
+    }
   }
+
+  currentFeatureImgInstance.set(nextProj);
 
   var imgElem = elem;
 
-  if (canTransition || dir === 'fwd') {
-    imgElem.fadeOut('fast', function () {
-      var img = new Image();
+  imgElem.fadeOut('fast', function () {
+    var img = new Image();
 
-      img.onload = function() {
-        imgElem.attr('src', newProj.img);
-        imgElem.fadeIn('fast');
-      };
+    img.onload = function() {
+      imgElem.attr('src', nextProj.img);
+      imgElem.fadeIn('fast');
+    };
 
-      img.src = newProj.img;
-    });
-  }
+    img.src = nextProj.img;
+  });
 };
 
 Template.Projects.onCreated(function() {
@@ -85,12 +85,22 @@ Template.Projects.helpers({
     return Session.get('projects')[0];
   },
   templateGestures: {
-    'swipeleft #feature-img': function(e, t) {
+    'swipeleft #feature-img-back': function(e, t) {
+      e.preventDefault();
       navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
     },
-    'swiperight #feature-img': function(e, t) {
+    'swiperight #feature-img-back': function(e, t) {
+      e.preventDefault();
       navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
     },
+    'swipeleft #feature-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
+    },
+    'swiperight #feature-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
+    }
   }
 });
 

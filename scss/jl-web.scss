@@ -28,6 +28,18 @@ body {
 	background: palette(gray,xx-light);
 	transition: font-size .3s ease-in-out;
 
+	&.no-scroll {
+		overflow: hidden;
+		height: 100%;
+		position: fixed;
+
+		@include gmq(portable) {
+			.site__content {
+					height: 75vh;
+			}
+		}
+	}
+
 	@media (max-width: 64em) {
 		line-height: 1;
 	}

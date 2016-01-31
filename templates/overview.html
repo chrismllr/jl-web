@@ -16,13 +16,15 @@
           <img src='/assets/cross.svg' class="inject-me" alt="close" />
         </button>
 
-        <button id="lightbox-img-back"
-          type="button"
-          class="project__btn project__btn--back"></button>
+        {{#HammerTouchArea gestureMap=templateGestures}}
+          <button id="lightbox-img-back"
+            type="button"
+            class="project__btn project__btn--back"></button>
 
-        <button id="lightbox-img-fwd"
-          type="button"
-          class="project__btn project__btn--fwd"></button>
+          <button id="lightbox-img-fwd"
+            type="button"
+            class="project__btn project__btn--fwd"></button>
+        {{/HammerTouchArea}}
       </div>
     {{/if}}
   </div>
