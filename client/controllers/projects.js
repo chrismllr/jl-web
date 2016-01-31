@@ -37,6 +37,7 @@ var navigateFeature = function(ftImg, projects, elem, dir) {
 
 Template.Projects.onCreated(function() {
   this.currentFeatureImg = new ReactiveVar({});
+  $('body').addClass('projects');
 });
 
 Template.Projects.onRendered(function() {
@@ -48,6 +49,7 @@ Template.Projects.onRendered(function() {
 
 Template.Projects.onDestroyed(function() {
   detachProjectsEvents();
+  $('body').removeClass('projects');
 });
 
 var attachProjectsEvents = function() {

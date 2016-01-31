@@ -30,7 +30,6 @@ body {
 
 	&.no-scroll {
 		overflow: hidden;
-		height: 100%;
 		position: fixed;
 
 		@include gmq(portable) {
@@ -38,6 +37,11 @@ body {
 					height: 75vh;
 			}
 		}
+	}
+
+	&.projects {
+		overflow: hidden;
+		position: fixed;
 	}
 
 	@media (max-width: 64em) {

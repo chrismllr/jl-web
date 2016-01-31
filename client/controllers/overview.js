@@ -10,10 +10,19 @@ Template.Overview.onCreated(function() {
 
 Template.Overview.onRendered(function() {
   attachOverviewEvents();
+
+  var manager = $('body').data('hammer');
+  var swipeRecognizer = manager.get('swipe');
+
+  swipeRecognizer.set({
+    velocity: 500,
+    threshold: 1000
+  });
 });
 
 Template.Projects.onDestroyed(function() {
   detachOverviewEvents();
+  $('body').removeClass('overview');
 });
 
 var attachOverviewEvents = function() {
@@ -81,6 +90,10 @@ Template.Overview.helpers({
   currentFeatureImg: function() {
     return Template.instance().currentFeatureImg.get();
   },
+
+  // hammerInitOptions: {
+  //   swipe: { velocity: 0.2, threshold: 5 }
+  // },
 
   templateGestures: {
     'swipeleft #lightbox-img-back': function(e, t) {
