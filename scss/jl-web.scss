@@ -2,6 +2,8 @@
 @import 'layouts/all-layouts';
 @import 'components/all-components';
 
+$safari-height: calc(70vh - 44px);
+
 pre {
 	display: none;
 }
@@ -46,11 +48,18 @@ body {
 		&.safari {
 			@include gmq(portable) {
 				.site__header {
-					height: 20vh;
+					height: 25vh;
 				}
 				.site__content {
-					height: 80vh;
-					padding-bottom: 50px;
+					height: $safari-height;
+
+					.project__wrapper {
+						height: $safari-height;
+					}
+
+					.project__featured {
+						max-height: $safari-height;
+					}
 				}
 			}
 		}
