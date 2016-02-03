@@ -1,66 +1,6 @@
-// ---------------------------------------------------------
-// Projects
-// ---------------------------------------------------------
+/* globals Projects */
 
-var navigateFeature = function(ftImg, projects, elem, dir) {
-  var currentFeatureImgInstance = ftImg;
-  var currentFeatureImgPath = ftImg.curValue.img;
-  var curIndex = projects.map(function (proj) {
-    return proj.img;
-  }).indexOf(currentFeatureImgPath);
-
-  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
-
-  if (!nextProj) {
-    if (dir !== 'fwd') {
-      nextProj = projects[projects.length - 1];
-    } else {
-      nextProj = projects[0];
-    }
-  }
-
-  currentFeatureImgInstance.set(nextProj);
-
-  var imgElem = elem;
-
-  imgElem.fadeOut('fast', function () {
-    var img = new Image();
-
-    img.onload = function() {
-      imgElem.attr('src', nextProj.img);
-      imgElem.fadeIn('fast');
-    };
-
-    img.src = nextProj.img;
-  });
-};
-
-Template.Projects.onCreated(function() {
-  this.currentFeatureImg = new ReactiveVar({});
-  $('body').addClass('projects');
-});
-
-Template.Projects.onRendered(function() {
-  var mySVGsToInject = document.querySelectorAll('img.inject-me');
-  new SVGInjector(mySVGsToInject);
-
-  attachProjectsEvents();
-});
-
-Template.Projects.onDestroyed(function() {
-  detachProjectsEvents();
-  $('body').removeClass('projects');
-});
-
-var attachProjectsEvents = function() {
-  document.getElementById('body').addEventListener('keyup', projectKeyup, false);
-};
-
-var detachProjectsEvents = function() {
-  document.getElementById('body').removeEventListener('keyup', projectKeyup, false);
-};
-
-var projectKeyup = function(e) {
+const projectKeyup = (e) => {
   e.preventDefault();
   var FWD = 39;
   var BACK = 37;
@@ -78,40 +18,133 @@ var projectKeyup = function(e) {
   }
 };
 
+const attachProjectsEvents = () => {
+  document.getElementById('body').addEventListener('keyup', projectKeyup, false);
+};
+
+const detachProjectsEvents = () => {
+  document.getElementById('body').removeEventListener('keyup', projectKeyup, false);
+};
+
+const slideshow = {
+  setup(ftImg, projects, dir, self) {
+    this.runSlideshow = setTimeout(() => {
+      navigateFeature(ftImg, projects, dir, (newFtImg) => {
+        this.remind(newFtImg, projects, 'fwd', self);
+      });
+    }, 5000);
+  },
+
+  remind(ftImg, projects, dir, self) {
+    this.runSlideshow = setTimeout(() => {
+      navigateFeature(ftImg, projects, dir, (newFtImg) => {
+        this.remind(newFtImg, projects, 'fwd', self);
+      });
+    }, 5000);
+  },
+
+  cancel() {
+    clearTimeout(this.runSlideshow);
+    this.runSlideshow = undefined;
+  }
+};
+
+// ---------------------------------------------------------
+// Projects
+// ---------------------------------------------------------
+
+Template.Projects.onCreated(function() {
+  this.currentFeatureImg = new ReactiveVar({});
+
+  $('body').addClass('projects');
+});
+
+Template.Projects.onRendered(function() {
+  var mySVGsToInject = document.querySelectorAll('img.inject-me');
+  new SVGInjector(mySVGsToInject);
+
+  attachProjectsEvents();
+  slideshow.setup(this.currentFeatureImg, Projects.find().fetch(), 'fwd', this);
+});
+
+Template.Projects.onDestroyed(function() {
+  detachProjectsEvents();
+  slideshow.cancel();
+  $('body').removeClass('projects');
+});
+
+var navigateFeature = function(ftImg, projects, dir, cb) {
+  var elem = $('#feature-img');
+  var currentFeatureImgInstance = ftImg;
+  var currentFeatureImgPath = ftImg.curValue.img;
+  var curIndex = projects.map(proj => proj.img).indexOf(currentFeatureImgPath);
+
+  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
+
+  if (!nextProj) {
+    if (dir !== 'fwd') {
+      nextProj = projects[projects.length - 1];
+    } else {
+      nextProj = projects[0];
+    }
+  }
+
+  currentFeatureImgInstance.set(nextProj);
+  elem.attr('src', nextProj.img);
+
+  cb(currentFeatureImgInstance);
+};
+
 Template.Projects.helpers({
-  projects: function() {
-    return Session.get('projects');
+  currentFeatureImg() {
+    Template.instance().currentFeatureImg.set(Projects.find().fetch()[0]);
+    return Projects.find().fetch()[0];
   },
-  currentFeatureImg: function() {
-    Template.instance().currentFeatureImg.set(Session.get('projects')[0]);
-    return Session.get('projects')[0];
-  },
+
   templateGestures: {
     'swipeleft #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
+      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+        slideshow.cancel();
+        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      });
     },
     'swiperight #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
+      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+        slideshow.cancel();
+        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      });
     },
     'swipeleft #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
+      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+        slideshow.cancel();
+        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      });
     },
     'swiperight #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
+      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+        slideshow.cancel();
+        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      });
     }
   }
 });
 
 Template.Projects.events({
   'click #feature-img-fwd': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'fwd');
+    navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+      slideshow.cancel();
+      slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+    });
   },
 
   'click #feature-img-back': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Session.get('projects'), $('#feature-img'), 'back');
+    navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+      slideshow.cancel();
+      slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+    });
   }
 });

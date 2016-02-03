@@ -11,7 +11,7 @@ Template.Contact.onRendered(function() {
   new SVGInjector(mySVGsToInject);
 });
 
-var copyClipboard = function(txt, cb) {
+const copyClipboard = (txt, cb) => {
   var textArea = document.createElement("textarea");
   textArea.id = 'copy-email-textarea';
   textArea.style.position = 'fixed';
@@ -33,11 +33,15 @@ var copyClipboard = function(txt, cb) {
   }
 };
 
+const changeTooltipTxt = (txt) => {
+  document.getElementById('copy-email').dataset.tooltip = txt;
+};
+
 Template.Contact.events({
   'click #copy-email': function(e) {
     var txt = e.currentTarget.getAttribute('data-email');
 
-    copyClipboard(txt, function(result) {
+    copyClipboard(txt, (result) => {
       if (result === 'success') {
         setTimeout(function() { Tooltips.hide(); }, 3000);
       } else {
@@ -46,7 +50,3 @@ Template.Contact.events({
     });
   }
 });
-
-var changeTooltipTxt = function(txt) {
-  document.getElementById('copy-email').dataset.tooltip = txt;
-};

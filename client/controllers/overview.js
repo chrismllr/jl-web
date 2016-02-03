@@ -1,39 +1,6 @@
-// ---------------------------------------------------------
-// Overview
-// ---------------------------------------------------------
+/* globals Projects */
 
-Template.Overview.onCreated(function() {
-  this.lightbox = new ReactiveVar(false);
-  this.currentFeatureImg = new ReactiveVar({});
-  $('body').addClass('overview');
-});
-
-Template.Overview.onRendered(function() {
-  attachOverviewEvents();
-
-  var manager = $('body').data('hammer');
-  var swipeRecognizer = manager.get('swipe');
-
-  swipeRecognizer.set({
-    velocity: 500,
-    threshold: 1000
-  });
-});
-
-Template.Projects.onDestroyed(function() {
-  detachOverviewEvents();
-  $('body').removeClass('overview');
-});
-
-var attachOverviewEvents = function() {
-  document.getElementById('body').addEventListener('keyup', overviewKeyup, false);
-};
-
-var detachOverviewEvents = function() {
-  document.getElementById('body').removeEventListener('keyup', overviewKeyup, false);
-};
-
-var overviewKeyup = function(e) {
+const overviewKeyup = (e) => {
   e.preventDefault();
   var FWD = 39;
   var BACK = 37;
@@ -51,76 +18,18 @@ var overviewKeyup = function(e) {
   }
 };
 
-Template.Overview.helpers({
-  lightbox: function() {
-    return Template.instance().lightbox.get();
-  },
+const attachOverviewEvents = () => {
+  document.getElementById('body').addEventListener('keyup', overviewKeyup, false);
+};
 
-  featureImg: function() {
-    Template.instance().currentFeatureImg.set(Session.get('projects')[0]);
-    return Session.get('projects')[0];
-  },
+const detachOverviewEvents = () => {
+  document.getElementById('body').removeEventListener('keyup', overviewKeyup, false);
+};
 
-  projectCategories: function() {
-    var projects = Session.get('projects');
-    var projectCategories = projects.map(function(proj) {
-      return proj.projectCategory;
-    });
-    return _.uniq(projectCategories);
-  },
-
-  projects: function() {
-    var projects = Session.get('projects');
-    if (projects) {
-      var projectCategories = projects.map(function(proj) {
-        return proj.projectCategory;
-      });
-      var uniqueCategories = _.uniq(projectCategories);
-      return uniqueCategories.reduce(function(hash, cat) {
-        hash[cat] = projects.filter(function(proj) {
-          return proj.projectCategory === cat;
-        });
-
-        return hash;
-      }, {});
-    }
-    return {};
-  },
-
-  currentFeatureImg: function() {
-    return Template.instance().currentFeatureImg.get();
-  },
-
-  // hammerInitOptions: {
-  //   swipe: { velocity: 0.2, threshold: 5 }
-  // },
-
-  templateGestures: {
-    'swipeleft #lightbox-img-back': function(e, t) {
-      e.preventDefault();
-      navigateLightbox(t, Session.get('projects'), 'fwd');
-    },
-    'swiperight #lightbox-img-back': function(e, t) {
-      e.preventDefault();
-      navigateLightbox(t, Session.get('projects'), 'back');
-    },
-    'swipeleft #lightbox-img-fwd': function(e, t) {
-      e.preventDefault();
-      navigateLightbox(t, Session.get('projects'), 'fwd');
-    },
-    'swiperight #lightbox-img-fwd': function(e, t) {
-      e.preventDefault();
-      navigateLightbox(t, Session.get('projects'), 'back');
-    }
-  }
-});
-
-var navigateLightbox = function(t, projects, dir) {
+const navigateLightbox = (t, projects, dir) => {
   var currentFeatureImgInstance = t.currentFeatureImg;
   var curProjImg = currentFeatureImgInstance.curValue.img;
-  var curIndex = projects.map(function (proj) {
-    return proj.img;
-  }).indexOf(curProjImg);
+  var curIndex = projects.map(proj => proj.img).indexOf(curProjImg);
 
   var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
 
@@ -134,6 +43,78 @@ var navigateLightbox = function(t, projects, dir) {
     }
   }
 };
+
+// ---------------------------------------------------------
+// Overview
+// ---------------------------------------------------------
+
+Template.Overview.onCreated(function() {
+  this.lightbox = new ReactiveVar(false);
+  this.currentFeatureImg = new ReactiveVar({});
+  $('body').addClass('overview');
+});
+
+Template.Overview.onRendered(function() {
+  attachOverviewEvents();
+});
+
+Template.Projects.onDestroyed(function() {
+  detachOverviewEvents();
+  $('body').removeClass('overview');
+});
+
+Template.Overview.helpers({
+  lightbox() {
+    return Template.instance().lightbox.get();
+  },
+
+  featureImg() {
+    Template.instance().currentFeatureImg.set(Projects.find().fetch()[0]);
+    return Projects.find().fetch()[0];
+  },
+
+  projectCategories() {
+    var projects = Projects.find().fetch();
+    var projectCategories = projects.map(proj => proj.projectCategory);
+    return _.uniq(projectCategories);
+  },
+
+  projects() {
+    var projects = Projects.find().fetch();
+    if (projects) {
+      var projectCategories = projects.map(proj => proj.projectCategory);
+      var uniqueCategories = _.uniq(projectCategories);
+      return uniqueCategories.reduce((hash, cat) => {
+        hash[cat] = projects.filter(proj => proj.projectCategory === cat);
+        return hash;
+      }, {});
+    }
+    return {};
+  },
+
+  currentFeatureImg() {
+    return Template.instance().currentFeatureImg.get();
+  },
+
+  templateGestures: {
+    'swipeleft #lightbox-img-back': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Projects.find().fetch(), 'fwd');
+    },
+    'swiperight #lightbox-img-back': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Projects.find().fetch(), 'back');
+    },
+    'swipeleft #lightbox-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Projects.find().fetch(), 'fwd');
+    },
+    'swiperight #lightbox-img-fwd': function(e, t) {
+      e.preventDefault();
+      navigateLightbox(t, Projects.find().fetch(), 'back');
+    }
+  }
+});
 
 Template.Overview.events({
   'click .overview__project__item': function(e, t) {
@@ -152,11 +133,11 @@ Template.Overview.events({
   },
 
   'click #lightbox-img-back': function(e, t) {
-    navigateLightbox(t, Session.get('projects'), 'back');
+    navigateLightbox(t, Projects.find().fetch(), 'back');
   },
 
   'click #lightbox-img-fwd': function(e, t) {
-    navigateLightbox(t, Session.get('projects'), 'fwd');
+    navigateLightbox(t, Projects.find().fetch(), 'fwd');
   },
 
   'click #close-lightbox': function(e, t) {
@@ -166,9 +147,7 @@ Template.Overview.events({
     $('body').removeClass('no-scroll');
     $('.lightbox').addClass('exiting');
 
-    setTimeout(function() {
-      lightboxInstance.set(!curLightboxVal);
-    },500);
+    setTimeout(() => lightboxInstance.set(!curLightboxVal), 500);
 
   }
 });

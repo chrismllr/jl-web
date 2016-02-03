@@ -3,10 +3,10 @@
 // ---------------------------------------------------------
 
 Template.Header.helpers({
-  isContact: function() {
+  isContact() {
     return Router.current().location.get().path === '/contact';
   },
-  isOverview: function() {
+  isOverview() {
     return Router.current().location.get().path === '/overview';
   },
 });
