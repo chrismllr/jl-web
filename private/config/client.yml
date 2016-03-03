@@ -10,6 +10,11 @@ projects:
   name : chandra1
   projectCategory : main
 -
+  img : /content/Chandra-01.jpg
+  thumb : /content/thumbs/Chandra-01_thumb.jpg
+  name : chandra1
+  projectCategory : main
+- 
   img : /content/Chandra-03.jpg
   thumb : /content/thumbs/Chandra-03_thumb.jpg
   name : chandra3
