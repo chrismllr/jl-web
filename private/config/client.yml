@@ -15,6 +15,26 @@ projects:
   name : chandra3
   projectCategory : main
 -
+  img : /content/Maxwell-06.jpg
+  thumb : /content/thumbs/Maxwell-06_thumb.jpg
+  name : Maxwell6
+  projectCategory : main
+-  
+  img : /content/Maxwell-01.jpg
+  thumb : /content/thumbs/Maxwell-01_thumb.jpg
+  name : Maxwell1
+  projectCategory : main
+-  
+  img : /content/Maxwell-03.jpg
+  thumb : /content/thumbs/Maxwell-03_thumb.jpg
+  name : Maxwell3
+  projectCategory : main
+-  
+  img : /content/Maxwell-02.jpg
+  thumb : /content/thumbs/Maxwell-02_thumb.jpg
+  name : Maxwell2
+  projectCategory : main
+-  
   img : /content/Ciera-02.jpg
   thumb : /content/thumbs/Ciera-02_thumb.jpg
   name : ciera2
