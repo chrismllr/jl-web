@@ -15,3 +15,8 @@
 - Sublime Text 3 
 - Github desktop
 - -or- Terminal
+
+##IMG Sizing
+
+- 1400px widest/tallest @ 300dpi
+- 157 x 200 @300dpi for thumbs
