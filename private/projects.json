@@ -19,6 +19,30 @@
       "projectCategory": "main"
     },
     {
+      "img": "/content/Maxwell-06.jpg",
+      "thumb": "/content/thumbs/Maxwell-06_thumb.jpg",
+      "name" : "maxwell6",
+      "projectCategory" : "main"
+    },
+    {
+      "img": "/content/Maxwell-01.jpg",
+      "thumb": "/content/thumbs/Maxwell-01_thumb.jpg",
+      "name": "maxwell1",
+      "projectCategory": "main"
+    },
+    {
+      "img": "/content/Maxwell-03.jpg",
+      "thumb": "/content/thumbs/Maxwell-03_thumb.jpg",
+      "name": "maxwell3",
+      "projectCategory": "main"
+    },
+    {
+      "img": "/content/Maxwell-02.jpg",
+      "thumb": "/content/thumbs/Maxwell-02_thumb.jpg",
+      "name": "maxwell2",
+      "projectCategory": "main"
+    },
+    {
       "img": "/content/Ciera-02.jpg",
       "thumb": "/content/thumbs/Ciera-02_thumb.jpg",
       "name": "ciera2",
@@ -40,6 +64,24 @@
       "img": "/content/Abby-01.jpg",
       "thumb": "/content/thumbs/Abby-01_thumb.jpg",
       "name": "abby1",
+      "projectCategory": "main"
+    },
+    {
+      "img": "/content/Audrey-05.jpg",
+      "thumb": "/content/thumbs/Audrey-05_thumb.jpg",
+      "name": "audrey5",
+      "projectCategory": "main"
+    },
+    {
+      "img": "/content/Audrey-02.jpg",
+      "thumb": "/content/thumbs/Audrey-02_thumb.jpg",
+      "name": "audrey2",
+      "projectCategory": "main"
+    },
+    {
+      "img": "/content/Audrey-04.jpg",
+      "thumb": "/content/thumbs/Audrey-04_thumb.jpg",
+      "name": "audrey4",
       "projectCategory": "main"
     },
     {

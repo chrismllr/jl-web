@@ -1,7 +1,6 @@
 Projects = new Mongo.Collection('projects');
 
 if (Projects.find().count() === 0) {
-  // console.log(Assets)
   var data = JSON.parse(Assets.getText("projects.json"));
 
   data.projects.forEach(function (item) {
