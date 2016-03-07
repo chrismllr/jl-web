@@ -1,0 +1,166 @@
+projects:
+-
+  img : /content/Chandra-02.jpg
+  thumb : /content/thumbs/Chandra-02_thumb.jpg
+  name : chandra2
+  projectCategory : main
+-
+  img : /content/Chandra-01.jpg
+  thumb : /content/thumbs/Chandra-01_thumb.jpg
+  name : chandra1
+  projectCategory : main
+-
+  img : /content/Chandra-03.jpg
+  thumb : /content/thumbs/Chandra-03_thumb.jpg
+  name : chandra3
+  projectCategory : main
+-
+  img : /content/Maxwell-06.jpg
+  thumb : /content/thumbs/Maxwell-06_thumb.jpg
+  name : maxwell6
+  projectCategory : main
+-
+  img : /content/Maxwell-01.jpg
+  thumb : /content/thumbs/Maxwell-01_thumb.jpg
+  name : maxwell1
+  projectCategory : main
+-
+  img : /content/Maxwell-03.jpg
+  thumb : /content/thumbs/Maxwell-03_thumb.jpg
+  name : maxwell3
+  projectCategory : main
+-
+  img : /content/Maxwell-02.jpg
+  thumb : /content/thumbs/Maxwell-02_thumb.jpg
+  name : maxwell2
+  projectCategory : main
+-
+  img : /content/Ciera-02.jpg
+  thumb : /content/thumbs/Ciera-02_thumb.jpg
+  name : ciera2
+  projectCategory : main
+-
+  img : /content/Ciera-01.jpg
+  thumb : /content/thumbs/Ciera-01_thumb.jpg
+  name : ciera1
+  projectCategory : main
+-
+  img : /content/Ciera-03.jpg
+  thumb : /content/thumbs/Ciera-03_thumb.jpg
+  name : ciera3
+  projectCategory : main
+-
+  img : /content/Abby-01.jpg
+  thumb : /content/thumbs/Abby-01_thumb.jpg
+  name : abby1
+  projectCategory : main
+-
+  img : /content/Audrey-05.jpg
+  thumb : /content/thumbs/Audrey-05_thumb.jpg
+  name : audrey5
+  projectCategory : main
+-
+  img : /content/Audrey-02.jpg
+  thumb : /content/thumbs/Audrey-02_thumb.jpg
+  name : audrey2
+  projectCategory : main
+-
+  img : /content/Audrey-04.jpg
+  thumb : /content/thumbs/Audrey-04_thumb.jpg
+  name : audrey4
+  projectCategory : main
+-
+  img : /content/Hae.jpg
+  thumb : /content/thumbs/Hae_thumb.jpg
+  name : hae
+  projectCategory : main
+-
+  img : /content/Ana.jpg
+  thumb : /content/thumbs/Ana_thumb.jpg
+  name : ana
+  projectCategory : main
+-
+  img : /content/Dillon-02.jpg
+  thumb : /content/thumbs/Dillon-02_thumb.jpg
+  name : dillon2
+  projectCategory : main
+-
+  img : /content/Dillon-01.jpg
+  thumb : /content/thumbs/Dillon-01_thumb.jpg
+  name : dillon1
+  projectCategory : main
+-
+  img : /content/Haley-01.jpg
+  thumb : /content/thumbs/Haley-01_thumb.jpg
+  name : haley1
+  projectCategory : main
+-
+  img : /content/Haley-02.jpg
+  thumb : /content/thumbs/Haley-02_thumb.jpg
+  name : haley2
+  projectCategory : main
+-
+  img : /content/Ashley-01.jpg
+  thumb : /content/thumbs/Ashley-01_thumb.jpg
+  name : ashley1
+  projectCategory : main
+-
+  img : /content/Ashley-02.jpg
+  thumb : /content/thumbs/Ashley-02_thumb.jpg
+  name : ashley2
+  projectCategory : main
+-
+  img : /content/Savannah-01.jpg
+  thumb : /content/thumbs/Savannah-01_thumb.jpg
+  name : savannah1
+  projectCategory : main
+-
+  img : /content/Kyla-02.jpg
+  thumb : /content/thumbs/Kyla-02_thumb.jpg
+  name : kyla2
+  projectCategory : main
+-
+  img : /content/Kyla-03.jpg
+  thumb : /content/thumbs/Kyla-03_thumb.jpg
+  name : kyla3
+  projectCategory : main
+-
+  img : /content/Kyla-01.jpg
+  thumb : /content/thumbs/Kyla-01_thumb.jpg
+  name : kyla1
+  projectCategory : main
+-
+  img : /content/Myles-01.jpg
+  thumb : /content/thumbs/Myles-01_thumb.jpg
+  name : myles1
+  projectCategory : main
+-
+  img : /content/Myles-02.jpg
+  thumb : /content/thumbs/Myles-02_thumb.jpg
+  name : myles2
+  projectCategory : main
+-
+  img : /content/WFDouble-01.jpg
+  thumb : /content/thumbs/WFDouble-01_thumb.jpg
+  name : wfdouble1
+  projectCategory : main
+-
+  img : /content/WFDouble-02.jpg
+  thumb : /content/thumbs/WFDouble-02_thumb.jpg
+  name : wfdouble2
+  projectCategory : main
+-
+  img : /content/Tucker-01.jpg
+  thumb : /content/thumbs/Tucker-01_thumb.jpg
+  name : tucker1
+  projectCategory : main
+-
+  img : /content/Tucker-02.jpg
+  thumb : /content/thumbs/Tucker-02_thumb.jpg
+  name : tucker2
+  projectCategory : main
+-
+  img : /content/Tucker-03.jpg
+  thumb : /content/thumbs/Tucker-03_thumb.jpg
+  name : tucker3
+  projectCategory : main
