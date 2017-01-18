@@ -91,6 +91,7 @@ var navigateFeature = function(ftImg, projects, dir, cb) {
 
   currentFeatureImgInstance.set(nextProj);
   elem.attr('src', nextProj.img);
+  elem.attr('alt', nextProj.name);
 
   cb(currentFeatureImgInstance);
 };
