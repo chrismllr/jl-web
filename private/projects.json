@@ -4,24 +4,28 @@
       "img": "/content/Chandra-02.jpg",
       "thumb": "/content/thumbs/Chandra-02_thumb.jpg",
       "name": "chandra2",
+      "index": 1,
       "projectCategory": "main"
     },
     {
       "img": "/content/Chandra-01.jpg",
       "thumb": "/content/thumbs/Chandra-01_thumb.jpg",
       "name": "chandra1",
+      "index": 4,
       "projectCategory": "main"
     },
     {
       "img": "/content/Chandra-03.jpg",
       "thumb": "/content/thumbs/Chandra-03_thumb.jpg",
       "name": "chandra3",
+      "index": 3,
       "projectCategory": "main"
     },
     {
       "img": "/content/Maxwell-06.jpg",
       "thumb": "/content/thumbs/Maxwell-06_thumb.jpg",
       "name" : "maxwell6",
+      "index": 2,
       "projectCategory" : "main"
     },
     {

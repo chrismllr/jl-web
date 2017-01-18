@@ -51,6 +51,7 @@ const navigateLightbox = (t, projects, dir) => {
 Template.Overview.onCreated(function() {
   this.lightbox = new ReactiveVar(false);
   this.currentFeatureImg = new ReactiveVar({});
+  this.projects = new ReactiveVar(Projects.find({}, { sort: { index: 1 }}).fetch());
   $('body').addClass('overview');
 });
 
@@ -69,18 +70,19 @@ Template.Overview.helpers({
   },
 
   featureImg() {
-    Template.instance().currentFeatureImg.set(Projects.find().fetch()[0]);
-    return Projects.find().fetch()[0];
+    var firstProject = Template.instance().projects.get()[0];
+    Template.instance().currentFeatureImg.set(firstProject);
+    return firstProject;
   },
 
   projectCategories() {
-    var projects = Projects.find().fetch();
+    var projects = Template.instance().projects.get();
     var projectCategories = projects.map(proj => proj.projectCategory);
     return _.uniq(projectCategories);
   },
 
   projects() {
-    var projects = Projects.find().fetch();
+    var projects = Template.instance().projects.get();
     if (projects) {
       var projectCategories = projects.map(proj => proj.projectCategory);
       var uniqueCategories = _.uniq(projectCategories);
@@ -99,19 +101,19 @@ Template.Overview.helpers({
   templateGestures: {
     'swipeleft #lightbox-img-back': function(e, t) {
       e.preventDefault();
-      navigateLightbox(t, Projects.find().fetch(), 'fwd');
+      navigateLightbox(t, Template.instance().projects.get(), 'fwd');
     },
     'swiperight #lightbox-img-back': function(e, t) {
       e.preventDefault();
-      navigateLightbox(t, Projects.find().fetch(), 'back');
+      navigateLightbox(t, Template.instance().projects.get(), 'back');
     },
     'swipeleft #lightbox-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateLightbox(t, Projects.find().fetch(), 'fwd');
+      navigateLightbox(t, Template.instance().projects.get(), 'fwd');
     },
     'swiperight #lightbox-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateLightbox(t, Projects.find().fetch(), 'back');
+      navigateLightbox(t, Template.instance().projects.get(), 'back');
     }
   }
 });
@@ -133,11 +135,11 @@ Template.Overview.events({
   },
 
   'click #lightbox-img-back': function(e, t) {
-    navigateLightbox(t, Projects.find().fetch(), 'back');
+    navigateLightbox(t, Template.instance().projects.get(), 'back');
   },
 
   'click #lightbox-img-fwd': function(e, t) {
-    navigateLightbox(t, Projects.find().fetch(), 'fwd');
+    navigateLightbox(t, Template.instance().projects.get(), 'fwd');
   },
 
   'click #close-lightbox': function(e, t) {

@@ -55,6 +55,7 @@ const slideshow = {
 
 Template.Projects.onCreated(function() {
   this.currentFeatureImg = new ReactiveVar({});
+  this.projects = new ReactiveVar(Projects.find({}, { sort: { index: 1 } }).fetch());
 
   $('body').addClass('projects');
 });
@@ -64,7 +65,7 @@ Template.Projects.onRendered(function() {
   new SVGInjector(mySVGsToInject);
 
   attachProjectsEvents();
-  slideshow.setup(this.currentFeatureImg, Projects.find().fetch(), 'fwd', this);
+  slideshow.setup(this.currentFeatureImg, Template.instance().projects.get(), 'fwd', this);
 });
 
 Template.Projects.onDestroyed(function() {
@@ -98,37 +99,37 @@ var navigateFeature = function(ftImg, projects, dir, cb) {
 
 Template.Projects.helpers({
   currentFeatureImg() {
-    Template.instance().currentFeatureImg.set(Projects.find().fetch()[0]);
-    return Projects.find().fetch()[0];
+    Template.instance().currentFeatureImg.set(Template.instance().projects.get()[0]);
+return Template.instance().projects.get()[0];
   },
 
   templateGestures: {
     'swipeleft #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
         slideshow.cancel();
-        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+        slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swiperight #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
         slideshow.cancel();
-        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+        slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swipeleft #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
         slideshow.cancel();
-        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+        slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swiperight #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
         slideshow.cancel();
-        slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+        slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     }
   }
@@ -136,16 +137,16 @@ Template.Projects.helpers({
 
 Template.Projects.events({
   'click #feature-img-fwd': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'fwd', function(newFtImg) {
+    navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
       slideshow.cancel();
-      slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
     });
   },
 
   'click #feature-img-back': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Projects.find().fetch(), 'back', function(newFtImg) {
+    navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
       slideshow.cancel();
-      slideshow.setup(newFtImg, Projects.find().fetch(), 'fwd');
+      slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
     });
   }
 });
