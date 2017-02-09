@@ -5,28 +5,26 @@ Router.configure({
   layoutTemplate: 'Application'
 });
 
-Router.route('/', function() {
+Router.route('/', function () {
   this.layout('Application');
 
   this.render('Projects');
-}, {
-  waitOn: function() {
-    return Meteor.subscribe('projects');
-  }
-});
+}
+// , {
+//   waitOn: function() {
+//     return Meteor.subscribe('projects');
+//   }
+// }
+);
 
-Router.route('contact', function () {
+Router.route('/contact', function () {
   this.layout('Application');
 
   this.render('Contact');
 });
 
-Router.route('overview', function () {
+Router.route('/overview', function () {
   this.layout('Application');
 
   this.render('Overview');
-}, {
-  waitOn: function() {
-    return Meteor.subscribe('projects');
-  }
 });

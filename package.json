@@ -1,0 +1,27 @@
+{
+  "name": "jl-web",
+  "version": "1.0.0",
+  "description": "justin leveritt website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrismllr/jl-web.git"
+  },
+  "keywords": [
+    "photography",
+    "new",
+    "york"
+  ],
+  "author": "chris miller <chrsmllr@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrismllr/jl-web/issues"
+  },
+  "homepage": "https://github.com/chrismllr/jl-web#readme",
+  "dependencies": {
+    "babel-runtime": "^6.22.0"
+  }
+}

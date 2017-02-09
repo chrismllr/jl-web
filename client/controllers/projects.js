@@ -1,4 +1,5 @@
 /* globals Projects */
+import Cs from '../contentful.service';
 
 const projectKeyup = (e) => {
   e.preventDefault();
@@ -27,18 +28,18 @@ const detachProjectsEvents = () => {
 };
 
 const slideshow = {
-  setup(ftImg, projects, dir, self) {
+  setup(index, projects, dir, self) {
     this.runSlideshow = setTimeout(() => {
-      navigateFeature(ftImg, projects, dir, (newFtImg) => {
-        this.remind(newFtImg, projects, 'fwd', self);
+      navigateFeature(index, projects, dir, (newIndex) => {
+        this.remind(newIndex, projects, 'fwd', self);
       });
     }, 5000);
   },
 
   remind(ftImg, projects, dir, self) {
     this.runSlideshow = setTimeout(() => {
-      navigateFeature(ftImg, projects, dir, (newFtImg) => {
-        this.remind(newFtImg, projects, 'fwd', self);
+      navigateFeature(index, projects, dir, (newIndex) => {
+        this.remind(newIndex, projects, 'fwd', self);
       });
     }, 5000);
   },
@@ -54,10 +55,14 @@ const slideshow = {
 // ---------------------------------------------------------
 
 Template.Projects.onCreated(function() {
-  this.currentFeatureImg = new ReactiveVar({});
-  this.projects = new ReactiveVar(Projects.find({}, { sort: { index: 1 } }).fetch());
-
   $('body').addClass('projects');
+  this.curIndex = new ReactiveVar(0);
+  this.projects = new ReactiveVar([]);
+
+  Cs.getProjects().then((projects) => {
+    this.projects.set(projects);
+    slideshow.setup(this.curIndex, projects, 'fwd', this);
+  });
 });
 
 Template.Projects.onRendered(function() {
@@ -65,7 +70,7 @@ Template.Projects.onRendered(function() {
   new SVGInjector(mySVGsToInject);
 
   attachProjectsEvents();
-  slideshow.setup(this.currentFeatureImg, Template.instance().projects.get(), 'fwd', this);
+  
 });
 
 Template.Projects.onDestroyed(function() {
@@ -74,60 +79,55 @@ Template.Projects.onDestroyed(function() {
   $('body').removeClass('projects');
 });
 
-var navigateFeature = function(ftImg, projects, dir, cb) {
+var navigateFeature = function(indexInstance, projects, dir, cb) {
   var elem = $('#feature-img');
-  var currentFeatureImgInstance = ftImg;
-  var currentFeatureImgPath = ftImg.curValue.img;
-  var curIndex = projects.map(proj => proj.img).indexOf(currentFeatureImgPath);
+  var curIndex = indexInstance.get();
 
-  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
+  var nextIndex = dir === 'fwd' ? curIndex + 1 : curIndex - 1;
 
-  if (!nextProj) {
-    if (dir !== 'fwd') {
-      nextProj = projects[projects.length - 1];
-    } else {
-      nextProj = projects[0];
-    }
+  if (nextIndex > projects.length - 1) {
+    indexInstance.set(0);
+  } else if (nextIndex >= 0) {
+    indexInstance.set(nextIndex);
+  } else {
+    indexInstance.set(projects.length - 1);
   }
 
-  currentFeatureImgInstance.set(nextProj);
-  elem.attr('src', nextProj.img);
-  elem.attr('alt', nextProj.name);
-
-  cb(currentFeatureImgInstance);
+  cb(indexInstance);
 };
 
 Template.Projects.helpers({
-  currentFeatureImg() {
-    Template.instance().currentFeatureImg.set(Template.instance().projects.get()[0]);
-return Template.instance().projects.get()[0];
+  featureImage () {
+    return Template.instance().projects.get()[
+      Template.instance().curIndex.get()
+    ];
   },
 
   templateGestures: {
     'swipeleft #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
+      navigateFeature(t.curIndex, Template.instance().projects.get(), 'fwd', function(newFtImg) {
         slideshow.cancel();
         slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swiperight #feature-img-back': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
+      navigateFeature(t.curIndex, Template.instance().projects.get(), 'back', function(newFtImg) {
         slideshow.cancel();
         slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swipeleft #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
+      navigateFeature(t.curIndex, Template.instance().projects.get(), 'fwd', function(newFtImg) {
         slideshow.cancel();
         slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
     },
     'swiperight #feature-img-fwd': function(e, t) {
       e.preventDefault();
-      navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
+      navigateFeature(t.curIndex, Template.instance().projects.get(), 'back', function(newFtImg) {
         slideshow.cancel();
         slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
       });
@@ -137,16 +137,16 @@ return Template.instance().projects.get()[0];
 
 Template.Projects.events({
   'click #feature-img-fwd': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'fwd', function(newFtImg) {
+    navigateFeature(t.curIndex, Template.instance().projects.get(), 'fwd', function(newFtImg) {
       slideshow.cancel();
       slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
     });
   },
 
   'click #feature-img-back': function(e, t) {
-    navigateFeature(t.currentFeatureImg, Template.instance().projects.get(), 'back', function(newFtImg) {
+    navigateFeature(t.curIndex, Template.instance().projects.get(), 'back', function(newIndex) {
       slideshow.cancel();
-      slideshow.setup(newFtImg, Template.instance().projects.get(), 'fwd');
+      slideshow.setup(newIndex, Template.instance().projects.get(), 'fwd');
     });
   }
 });
