@@ -1,4 +1,5 @@
 /* globals Projects */
+const Cs = require('../contentful.service');
 
 const overviewKeyup = (e) => {
   e.preventDefault();
@@ -26,20 +27,19 @@ const detachOverviewEvents = () => {
   document.getElementById('body').removeEventListener('keyup', overviewKeyup, false);
 };
 
-const navigateLightbox = (t, projects, dir) => {
-  var currentFeatureImgInstance = t.currentFeatureImg;
-  var curProjImg = currentFeatureImgInstance.curValue.img;
-  var curIndex = projects.map(proj => proj.img).indexOf(curProjImg);
+const navigateLightbox = (t, projects, index, dir) => {
+  var indexInstance = t.curIndex;
+  var curIndex = index;
 
-  var nextProj = dir === 'fwd' ? projects[curIndex + 1] : projects[curIndex - 1];
+  var nextIndex = dir === 'fwd' ? curIndex + 1 : curIndex - 1;
 
-  if (nextProj) {
-    currentFeatureImgInstance.set(nextProj);
+  if (nextIndex) {
+    indexInstance.set(nextIndex);
   } else {
     if (dir === 'fwd') {
-      currentFeatureImgInstance.set(projects[0]);
+      indexInstance.set(0);
     } else {
-      currentFeatureImgInstance.set(projects[projects.length - 1]);
+      indexInstance.set(projects.length - 1);
     }
   }
 };
@@ -49,10 +49,15 @@ const navigateLightbox = (t, projects, dir) => {
 // ---------------------------------------------------------
 
 Template.Overview.onCreated(function() {
-  this.lightbox = new ReactiveVar(false);
-  this.currentFeatureImg = new ReactiveVar({});
-  this.projects = new ReactiveVar(Projects.find({}, { sort: { index: 1 }}).fetch());
   $('body').addClass('overview');
+  this.projects = new ReactiveVar([]);
+  this.curIndex = new ReactiveVar(0);
+  this.lightbox = new ReactiveVar(false);
+
+  Cs.getProjects()
+    .then((projects) => {
+      this.projects.set(projects);
+    });
 });
 
 Template.Overview.onRendered(function() {
@@ -69,10 +74,10 @@ Template.Overview.helpers({
     return Template.instance().lightbox.get();
   },
 
-  featureImg() {
-    var firstProject = Template.instance().projects.get()[0];
-    Template.instance().currentFeatureImg.set(firstProject);
-    return firstProject;
+  featureImage () {
+    return Template.instance().projects.get()[
+      Template.instance().curIndex.get()
+    ];
   },
 
   projectCategories() {
@@ -83,6 +88,7 @@ Template.Overview.helpers({
 
   projects() {
     var projects = Template.instance().projects.get();
+
     if (projects) {
       var projectCategories = projects.map(proj => proj.projectCategory);
       var uniqueCategories = _.uniq(projectCategories);
@@ -91,13 +97,10 @@ Template.Overview.helpers({
         return hash;
       }, {});
     }
+
     return {};
   },
-
-  currentFeatureImg() {
-    return Template.instance().currentFeatureImg.get();
-  },
-
+  
   templateGestures: {
     'swipeleft #lightbox-img-back': function(e, t) {
       e.preventDefault();
@@ -121,12 +124,14 @@ Template.Overview.helpers({
 Template.Overview.events({
   'click .overview__project__item': function(e, t) {
     var lightboxInstance = t.lightbox;
-    var currentFeatureImgInstance = t.currentFeatureImg;
+    var indexInstance = t.curIndex;
     var curLightboxVal = lightboxInstance.get();
 
     $('body').addClass('no-scroll');
     lightboxInstance.set(!curLightboxVal);
-    currentFeatureImgInstance.set(this);
+    indexInstance.set(
+      t.projects.get().indexOf(this)
+    );
 
     setTimeout(function() {
       var mySVGsToInject = document.querySelectorAll('img.inject-me');
@@ -135,11 +140,11 @@ Template.Overview.events({
   },
 
   'click #lightbox-img-back': function(e, t) {
-    navigateLightbox(t, Template.instance().projects.get(), 'back');
+    navigateLightbox(t, Template.instance().projects.get(), Template.instance().curIndex.get(), 'back');
   },
 
   'click #lightbox-img-fwd': function(e, t) {
-    navigateLightbox(t, Template.instance().projects.get(), 'fwd');
+    navigateLightbox(t, Template.instance().projects.get(),  Template.instance().curIndex.get(), 'fwd');
   },
 
   'click #close-lightbox': function(e, t) {
@@ -150,6 +155,5 @@ Template.Overview.events({
     $('.lightbox').addClass('exiting');
 
     setTimeout(() => lightboxInstance.set(!curLightboxVal), 500);
-
   }
 });
