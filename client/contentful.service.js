@@ -7,7 +7,8 @@ const IS_SUCCESS = (status) => status >= 200 && status < 300;
 
 function normalize (json) {
   const assets = json.includes.Asset;
-  const items = json.items
+
+  return json.items
     .map((item) => item.fields)
     .sort((a, b) => {
       if (a.index > b.index) {
@@ -24,52 +25,17 @@ function normalize (json) {
       const foundImage = assets.find((asset) => {
         return proj.image.sys.id === asset.sys.id;
       });
+
       const foundThumb = assets.find((asset) => {
         return proj.thumb.sys.id === asset.sys.id;
       });
 
       proj.image = foundImage.fields.file.url;
       proj.thumb = foundThumb.fields.file.url;
+
       return proj;
-    })
-
-  console.log(items);
-
-  return items;
+    });
 }
-
-// function normalizeDocuments (json) {
-//   const assets = json.includes.Asset;
-
-//   return json.items
-//     .map((item) => item.fields)
-//     .map((doc) => {
-//       if (!doc.file) {
-//         return doc;
-//       }
-
-//       const foundAsset = assets.find((asset) => {
-//         return doc.file.sys.id === asset.sys.id;
-//       });
-
-//       doc.file = foundAsset.fields.file;
-//       doc.link = foundAsset.fields.file.url;
-//       return doc;
-//     });
-// }
-
-// function normalizeHolidays (json) {
-//   return json.items
-//     .map((item) => item.fields)
-//     .filter(shouldShowHoliday)
-//     .sort((a, b) => {
-//       if (isAfter(a.firstDay, b.firstDay)) {
-//         return 1;
-//       }
-
-//       return -1;
-//     });
-// }
 
 function validateResponse (response) {
   if (IS_SUCCESS) {
